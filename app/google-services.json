@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "420198454131",
+    "project_id": "ferterliser-distribution",
+    "storage_bucket": "ferterliser-distribution.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420198454131:android:c011aceaaccc48f0b3eb06",
+        "android_client_info": {
+          "package_name": "com.example.ferterliserdistribution"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAArw5c0NCnIOnrNo1gM_-yX15Vy1Oy0mY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Ferterliser Distribution</string>
+
+    <string-array name="role_array">
+        <item>Admin</item>
+        <item>User</item>
+        <item>Distributor</item>
+        <item>Delivery</item>
+    </string-array>
+</resources>

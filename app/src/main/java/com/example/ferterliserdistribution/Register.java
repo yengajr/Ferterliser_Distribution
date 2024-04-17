@@ -1,0 +1,128 @@
+package com.example.ferterliserdistribution;
+
+import android.app.Dialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+public class Register extends AppCompatActivity {
+
+    TextInputEditText name, email, password, confirm_password;
+    Button register;
+
+    private FirebaseAuth mAuth;
+    FirebaseFirestore db;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_register);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+// Create an ArrayAdapter using the string array and a default spinner layout.
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.role_array,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+
+        //initialize the TextInputEditText
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        confirm_password = findViewById(R.id.confirm_password);
+        register = findViewById(R.id.register);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        db = FirebaseFirestore.getInstance();
+        Dialog dialog = new MaterialAlertDialogBuilder(this)
+                .setTitle("Register in progress...")
+                .setMessage("Please wait")
+                .create();
+
+
+//...
+//set on click listener to the register button
+        register.setOnClickListener(v -> {
+            //get the values from the TextInputEditText
+            String nameValue = name.getText().toString().trim();
+            String emailValue = email.getText().toString().trim();
+            String passwordValue = password.getText().toString().trim();
+            String confirmPasswordValue = confirm_password.getText().toString().trim();
+            String roleValue = spinner.getSelectedItem().toString().trim(); // Get selected role
+
+            //validate the values
+            if (nameValue.isEmpty() || emailValue.isEmpty() || passwordValue.isEmpty() || confirmPasswordValue.isEmpty()) {
+                //show a toast message
+                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            //check if the password and confirm password are the same
+            else if (!passwordValue.equals(confirmPasswordValue)) {
+                //show a toast message
+                Toast.makeText(this, "passwords do not match", Toast.LENGTH_SHORT).show();
+            } else {
+                dialog.show();
+                //create with email and password
+                mAuth.createUserWithEmailAndPassword(emailValue, passwordValue)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user1 = mAuth.getCurrentUser();
+                                String user2 = user1.getUid();
+
+                                // Add user details to firestore
+                                db.collection("users").document(user2) // Using "users" collection
+                                        .set(new User(nameValue, emailValue, passwordValue, roleValue)) // Include roleValue
+                                        .addOnSuccessListener(aVoid -> {
+                                            dialog.dismiss();
+                                            // Sign in success, update UI with the signed-in user's information
+                                            Toast.makeText(Register.this, "Sign up successful.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            dialog.dismiss();
+                                            Toast.makeText(Register.this, "Sign up failed.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        });
+
+                            } else {
+                                dialog.dismiss();
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(Register.this, "Sign up failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+            }
+        });
+//...
+
+
+    }
+}
