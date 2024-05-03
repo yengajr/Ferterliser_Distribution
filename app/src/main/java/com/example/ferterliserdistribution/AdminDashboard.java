@@ -30,7 +30,7 @@ public class AdminDashboard extends AppCompatActivity {
         textView.setOnClickListener(v -> {
             // move to inventory_addition activity
             startActivity(new Intent(AdminDashboard.this, InventoryAddition.class));
-
+            
 
         });
     }
