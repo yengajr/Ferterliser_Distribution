@@ -1,6 +1,8 @@
 package com.example.ferterliserdistribution;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class AdminDashboard extends AppCompatActivity {
+
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +23,15 @@ public class AdminDashboard extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        textView = findViewById(R.id.appTitle);
+
+        textView.setOnClickListener(v -> {
+            // move to inventory_addition activity
+            startActivity(new Intent(AdminDashboard.this, InventoryAddition.class));
+
+
         });
     }
 }
