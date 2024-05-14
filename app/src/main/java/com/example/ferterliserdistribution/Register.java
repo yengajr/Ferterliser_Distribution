@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,10 +23,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class Register extends AppCompatActivity {
 
     TextInputEditText name, email, password, confirm_password;
     Button register;
+    TextView login;
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -32,13 +37,7 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout.
@@ -57,24 +56,25 @@ public class Register extends AppCompatActivity {
         password = findViewById(R.id.password);
         confirm_password = findViewById(R.id.confirm_password);
         register = findViewById(R.id.register);
+        login = findViewById(R.id.login);
 
         mAuth = FirebaseAuth.getInstance();
 
         db = FirebaseFirestore.getInstance();
+        //dialog to show progress
         Dialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Register in progress...")
+                .setView(new ProgressBar(this))
+                .setTitle("Signing up")
                 .setMessage("Please wait")
                 .create();
 
-
-//...
 //set on click listener to the register button
         register.setOnClickListener(v -> {
             //get the values from the TextInputEditText
-            String nameValue = name.getText().toString().trim();
-            String emailValue = email.getText().toString().trim();
-            String passwordValue = password.getText().toString().trim();
-            String confirmPasswordValue = confirm_password.getText().toString().trim();
+            String nameValue = Objects.requireNonNull(name.getText()).toString().trim();
+            String emailValue = Objects.requireNonNull(email.getText()).toString().trim();
+            String passwordValue = Objects.requireNonNull(password.getText()).toString().trim();
+            String confirmPasswordValue = Objects.requireNonNull(confirm_password.getText()).toString().trim();
             String roleValue = spinner.getSelectedItem().toString().trim(); // Get selected role
 
             //validate the values
@@ -94,6 +94,7 @@ public class Register extends AppCompatActivity {
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 FirebaseUser user1 = mAuth.getCurrentUser();
+                                assert user1 != null;
                                 String user2 = user1.getUid();
 
                                 // Add user details to firestore
@@ -121,8 +122,12 @@ public class Register extends AppCompatActivity {
 
             }
         });
-//...
 
-
+        //set on click listener to the login textview
+        login.setOnClickListener(v -> {
+            //redirect to login page
+            startActivity(new Intent(Register.this, Login.class));
+            finish();
+        });
     }
 }

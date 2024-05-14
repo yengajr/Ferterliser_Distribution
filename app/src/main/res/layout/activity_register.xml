@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Register">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp"
+        android:layout_gravity="center_vertical">
 
     <TextView
         android:id="@+id/textview1"
@@ -14,11 +22,11 @@
         android:text="Register"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_below="@+id/textview1"
         android:id="@+id/textField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +44,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textField"
         android:id="@+id/textView"
         android:text="Select your role"
         android:layout_marginTop="10dp"
@@ -46,18 +53,16 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
         android:id="@+id/spinner"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="4dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:textColorHint="@color/white"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:background="@drawable/spinner_design"
         />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_below="@+id/spinner"
         android:id="@+id/textField2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +77,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_below="@+id/textField2"
         android:id="@+id/textField3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,7 +92,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_below="@+id/textField3"
         android:id="@+id/textField4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,13 +108,52 @@
 
 
     <Button
-        android:layout_below="@+id/textField4"
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
-        android:gravity="center"/>
+        android:layout_gravity="center"/>
 
-</RelativeLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:text="Already have an account?"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login"
+            android:text="Login"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class Login extends AppCompatActivity {
     TextInputEditText email, password;
     Button login;
@@ -27,10 +30,10 @@ public class Login extends AppCompatActivity {
     FirebaseFirestore db;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -56,15 +59,18 @@ public class Login extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
+        //dialog to show progress
         Dialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Login in progress...")
+                .setView(new ProgressBar(this))
+                .setTitle("Signing in")
                 .setMessage("Please wait")
                 .create();
 
+
         login.setOnClickListener(v -> {
             //get the values from the TextInputEditText
-            String emailValue = email.getText().toString().trim();
-            String passwordValue = password.getText().toString().trim();
+            String emailValue = Objects.requireNonNull(email.getText()).toString().trim();
+            String passwordValue = Objects.requireNonNull(password.getText()).toString().trim();
 
             //validate the values
             if (emailValue.isEmpty() || passwordValue.isEmpty()) {
@@ -76,44 +82,56 @@ public class Login extends AppCompatActivity {
                 dialog.show();
                 mAuth.signInWithEmailAndPassword(emailValue, passwordValue)
                         .addOnCompleteListener(task -> {
-                            dialog.dismiss();
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 if (user != null) {
-                                    Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                                     //get current user id
                                     String uid = user.getUid();
 
                                     //get user details from firestore
-                                    db.collection("users")
-                                            .document(uid)
-                                            .get()
-                                            .addOnCompleteListener(task1 -> {
+                                    db.collection("users").document(uid).get().addOnCompleteListener(task1 -> {
                                                 if (task1.isSuccessful()) {
                                                     //get user role
                                                     String role = task1.getResult().getString("roleValue");
                                                     if (role != null) {
-                                                        if (role.equals("Admin")) {
-                                                            //redirect to admin dashboard
-                                                            startActivity(new Intent(Login.this, AdminDashboard.class));
-                                                        } else if (role.equals("Distributor")) {
-                                                            //redirect to distributor dashboard
-                                                            startActivity(new Intent(Login.this, DistributorDashboard.class));
-                                                        } else if (role.equals("User")) {
-                                                            //redirect to user dashboard
-                                                            startActivity(new Intent(Login.this, UserDashboard.class));
+                                                        switch (role) {
+                                                            case "Admin":
+                                                                //redirect to admin dashboard
+                                                                startActivity(new Intent(Login.this, AdminDashboard.class));
+                                                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                                                dialog.dismiss();
+                                                                break;
+                                                            case "Distributor":
+                                                                //redirect to distributor dashboard
+                                                                startActivity(new Intent(Login.this, DistributorDashboard.class));
+                                                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                                                dialog.dismiss();
+                                                                break;
+                                                            case "User":
+                                                                //redirect to user dashboard
+                                                                startActivity(new Intent(Login.this, UserDashboard.class));
+                                                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                                                dialog.dismiss();
+                                                                break;
+
+                                                            case "Delivery":
+                                                                //redirect to delivery dashboard
+                                                                startActivity(new Intent(Login.this, DeliveryDashboard.class));
+                                                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                                                dialog.dismiss();
+                                                                break;
+
+                                                            default:
+                                                                Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                                                                dialog.dismiss();
                                                         }
-                                                    } else if (role.equals("Delivery")) {
-                                                        //redirect to delivery dashboard
-                                                        startActivity(new Intent(Login.this, DeliveryDashboard.class));
-                                                    } else {
-                                                        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
-                                                    }
                                                 }
+                                            }
                                             });
                                 }
                             } else {
                                 Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
                             }
                         });
 
