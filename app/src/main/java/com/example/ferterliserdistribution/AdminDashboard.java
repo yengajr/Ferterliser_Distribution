@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class AdminDashboard extends AppCompatActivity {
 
-    TextView textView;
+    TextView textView,textView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +26,17 @@ public class AdminDashboard extends AppCompatActivity {
         });
 
         textView = findViewById(R.id.appTitle);
+        textView1 = findViewById(R.id.itemManagement);
 
         textView.setOnClickListener(v -> {
             // move to inventory_addition activity
             startActivity(new Intent(AdminDashboard.this, InventoryAddition.class));
-            
 
+        });
+
+        textView1.setOnClickListener(v -> {
+            // move to item_management activity
+            startActivity(new Intent(AdminDashboard.this, InventoryManagement.class));
         });
     }
 }
