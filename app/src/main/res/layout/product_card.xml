@@ -7,7 +7,7 @@
     android:layout_marginTop="5dp"
     android:layout_marginBottom="1dp"
     android:layout_marginLeft="2dp"
-    android:background="@drawable/card_design"
+    android:background="@drawable/card_design2"
     android:layout_marginRight="2dp">
 
     <RelativeLayout
@@ -22,10 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="170dp"
             android:layout_centerInParent="true"
-            android:layout_marginTop="0dp"
             android:layout_marginBottom="4dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
             android:layout_alignParentTop="true"
             android:src="@drawable/blue_circle"
             />
@@ -35,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Item Name"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:paddingStart="2dp"
@@ -50,11 +47,24 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:text="Price"
             android:layout_below="@+id/name"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="0"
+            android:drawableEnd="@drawable/rating_icon"
+            android:textSize="18sp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/name"
+            android:layout_marginEnd="15dp"
+            android:id="@+id/ratings"
+            />
 
         <TextView
             android:id="@+id/id"
@@ -84,7 +94,7 @@
         <TextView
             android:id="@+id/count_text_view"
             android:layout_width="match_parent"
-            android:layout_height="115dp"
+            android:layout_height="170dp"
             android:layout_gravity="center"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"

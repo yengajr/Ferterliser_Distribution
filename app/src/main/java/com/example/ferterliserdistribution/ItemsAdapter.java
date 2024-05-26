@@ -41,10 +41,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ProductViewH
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productArrayList.get(position);
         holder.productName.setText(product.name);
-        holder.productPrice.setText(product.price);
+        holder.productPrice.setText(String.format("Ksh:%s", product.price));
         holder.categoryTextView.setText(product.category);
         holder.itemIdTextView.setText(product.itemId);
         holder.itemQuantityTextView.setText(product.quantity);
+        holder.productRating.setText(product.soldQuantity);
         Glide.with(holder.itemView.getContext()).load(product.image).placeholder(R.drawable.blue_circle).into(holder.productImage);
 
         // Display the current count, or hide if count is zero
@@ -77,7 +78,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ProductViewH
     public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView productImage;
-        TextView productName, productPrice, countTextView,categoryTextView,itemIdTextView, itemQuantityTextView;
+        TextView productName, productPrice, countTextView,categoryTextView,itemIdTextView, itemQuantityTextView, productRating;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +89,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ProductViewH
             categoryTextView = itemView.findViewById(R.id.category);
             itemIdTextView = itemView.findViewById(R.id.id);
             itemQuantityTextView = itemView.findViewById(R.id.quantity);
+            productRating = itemView.findViewById(R.id.ratings);
 
             itemView.setOnClickListener(this);
         }
@@ -145,8 +147,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ProductViewH
 
 
             //enable display of cart count
-           // Home_Page.cart_count.setVisibility(View.VISIBLE);
-           // Home_Page.cart_count.setText(String.valueOf(Product_Cart.getInstance().getSelectedProducts().size()));
+            UserDashboard.cart_count.setVisibility(View.VISIBLE);
+            UserDashboard.cart_count.setText(String.valueOf(Product_Cart.getInstance().getSelectedProducts().size()));
 
         }
     }

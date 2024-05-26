@@ -66,8 +66,5 @@ public class Product_Cart {
         product.setSoldQuantity(String.valueOf(soldQuantity));
     }
 
-
-
-
 }
 

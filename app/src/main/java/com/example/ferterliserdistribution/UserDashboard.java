@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -36,6 +37,8 @@ import java.util.Objects;
 public class UserDashboard extends AppCompatActivity {
 
     TextView username, announcementText;
+    ImageButton btn_navigation, btn_cart, btn_logout;
+    static TextView cart_count,current_total1;
     RecyclerView recyclerView;
     ShapeableImageView announcementImage;
     SearchView searchView;
@@ -83,6 +86,9 @@ public class UserDashboard extends AppCompatActivity {
         announcementImage = findViewById(R.id.user_card_image);
         searchView = findViewById(R.id.searchView);
         mySwipeRefreshLayout = findViewById(R.id.main);
+        cart_count = findViewById(R.id.cart_count);
+        btn_cart = findViewById(R.id.cart1);
+        //current_total1 = findViewById(R.id.current_total1);
 
         // Initialize firebase
         db = FirebaseFirestore.getInstance();
@@ -102,8 +108,9 @@ public class UserDashboard extends AppCompatActivity {
         // Set the texts
         announcementText.setText("Welcome to the Fertiliser Distribution App!");
 
-        announcementText.setOnClickListener(v -> {
-            // Move to the announcement page
+        // Set the cart button listener
+        btn_cart.setOnClickListener(v -> {
+            // Move to the cart page
             startActivity(new Intent(UserDashboard.this, Items_Cart.class));
         });
 

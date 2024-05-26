@@ -129,18 +129,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                 notifyItemRangeChanged(position, cardItemList.size());
                 Product_Cart.getInstance().removeFromCart(cardItem);
                 Toast.makeText(v.getContext(), cardItem.getName()+" removed from cart", Toast.LENGTH_SHORT).show();
+
+                //clear the item count
+                cardItem.setItemCount("0");
+
+                //get sold quantity of product
+                int count = Integer.parseInt(cardItem.getItemCount());
+                Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
+
+                //calculate remaining quantity of product
+                Product_Cart.getInstance().calculateRemainingQuantity(cardItem, count);
+
             }
         });
 
-        //set click for clear cat in the items cart page
-        Items_Cart.clear_cart.setOnClickListener(v -> {
-            // Clear the cart
-            Product_Cart.getInstance().getSelectedProducts().clear();
-            notifyDataSetChanged();
-            //move to the home page
-          //  context.startActivity(new Intent(context, Home_Page.class));
-
-        });
 
         //calculate remaining quantity of product
         int count = Integer.parseInt(cardItem.getItemCount());

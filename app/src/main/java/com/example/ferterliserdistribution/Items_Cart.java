@@ -20,7 +20,7 @@ import java.util.Map;
 public class Items_Cart extends AppCompatActivity {
 
     ImageButton back;
-    static TextView clear_cart, total_price;
+    static TextView total_price;
     Button checkout;
     RecyclerView recyclerView;
     CartAdapter cartAdapter;
@@ -38,7 +38,6 @@ public class Items_Cart extends AppCompatActivity {
         });
 
         back = findViewById(R.id.back_button);
-        clear_cart = findViewById(R.id.clear_cart);
         total_price = findViewById(R.id.total_amount);
         checkout = findViewById(R.id.checkout_button);
         recyclerView = findViewById(R.id.cart_recycler_view);
@@ -46,15 +45,10 @@ public class Items_Cart extends AppCompatActivity {
 
         back.setOnClickListener(v -> {
             //go back to the home page activity
-          //  startActivity(new Intent(Items_Cart.this, Home_Page.class));
-            //onBackPressed();
+            startActivity(new Intent(Items_Cart.this, UserDashboard.class));
+           // onBackPressed();
         });
 
-        clear_cart.setOnClickListener(v -> {
-            // Clear the cart
-            Product_Cart.getInstance().getSelectedProducts().clear();
-            cartAdapter.notifyDataSetChanged();
-        });
 
         checkout.setOnClickListener(v -> {
             // move to the checkout page
