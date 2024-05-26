@@ -144,13 +144,36 @@
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/description_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginStart="20dp"
+                    android:text="Description"
+                    android:textSize="18sp"
+                    android:layout_below="@id/textField_quantity"
+                    />
 
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/description_txt"
+                    android:background="@drawable/spinner_design"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="About the product"
+                    android:inputType="text"
+                    android:autofillHints="notes" />
 
                 <Button
                     android:id="@+id/add"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textField_quantity"
+                    android:layout_below="@id/description"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
@@ -164,13 +187,15 @@
                     android:id="@+id/discard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textField_quantity"
+                    android:layout_below="@id/description"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="20dp"
                     android:text="Discard"
                     android:textColor="@color/white"
                     android:background="@drawable/button_design" />
+
+
 
             </RelativeLayout>
 

@@ -29,6 +29,55 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+
+            //get current user id
+            String uid = currentUser.getUid();
+
+            //get user details from firestore
+            db.collection("users").document(uid).get().addOnCompleteListener(task1 -> {
+                if (task1.isSuccessful()) {
+                    //get user role
+                    String role = task1.getResult().getString("roleValue");
+                    if (role != null) {
+                        switch (role) {
+                            case "Admin":
+                                //redirect to admin dashboard
+                                startActivity(new Intent(Login.this, AdminDashboard.class));
+                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                break;
+                            case "Distributor":
+                                //redirect to distributor dashboard
+                                startActivity(new Intent(Login.this, DistributorDashboard.class));
+                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                break;
+                            case "User":
+                                //redirect to user dashboard
+                                startActivity(new Intent(Login.this, UserDashboard.class));
+                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case "Delivery":
+                                //redirect to delivery dashboard
+                                startActivity(new Intent(Login.this, DeliveryDashboard.class));
+                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            default:
+                                Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
+
+
+        }
+    }
 
 
     @Override

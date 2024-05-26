@@ -13,6 +13,12 @@
         android:theme="@style/Theme.FerterliserDistribution"
         tools:targetApi="31">
         <activity
+            android:name=".Items_Cart"
+            android:exported="false" />
+        <activity
+            android:name=".ProductDetails"
+            android:exported="false" />
+        <activity
             android:name=".UpdatePage"
             android:exported="false" />
         <activity

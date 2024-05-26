@@ -1,16 +1,15 @@
 package com.example.ferterliserdistribution;
 
 public class Product {
-    String name, image, price, quantity,barcode, itemId, category,itemTotal,totalAmount,itemCount,remainingQuantity,soldQuantity;
+    String name, image, price, quantity, itemId, category,description,itemTotal,totalAmount,itemCount,remainingQuantity,soldQuantity;
 
     public Product() {}
 
-    public Product(String name, String image, String price, String quantity, String barcode, String itemId, String category, String itemTotal, String totalAmount, String itemCount , String remainingQuantity, String soldQuantity) {
+    public Product(String name, String image, String price, String quantity, String itemId, String category, String itemTotal, String totalAmount, String itemCount , String remainingQuantity, String soldQuantity,String description) {
         this.name = name;
         this.image = image;
         this.price = price;
         this.quantity = quantity;
-        this.barcode = barcode;
         this.itemId = itemId;
         this.category = category;
         this.itemTotal = itemTotal;
@@ -18,6 +17,7 @@ public class Product {
         this.itemCount = itemCount;
         this.remainingQuantity = remainingQuantity;
         this.soldQuantity = soldQuantity;
+        this.description = description;
 
 
     }
@@ -54,13 +54,6 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
 
     public String getItemId() {
         return itemId;
@@ -117,6 +110,14 @@ public class Product {
 
     public void setSoldQuantity(String soldQuantity) {
         this.soldQuantity = soldQuantity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

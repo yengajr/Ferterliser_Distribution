@@ -35,18 +35,20 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public class InventoryAddition extends AppCompatActivity {
 
     ShapeableImageView shapeableImageView;
     TextInputEditText itemName, itemPrice, itemQuantity;
+    EditText description;
     TextView addCategory;
     Button save, discard ;
     Spinner category;
 
     Uri imageUri;
-    String imageUrl;
+    String imageUrl, desc, selectedCategory, name, price, quantity;
 
     private FirebaseAuth mAuth;
 
@@ -80,6 +82,7 @@ public class InventoryAddition extends AppCompatActivity {
         discard = findViewById(R.id.discard);
         addCategory = findViewById(R.id.add_category);
         category = findViewById(R.id.category);
+        description = findViewById(R.id.description);
 
 
         //dialog to show progress
@@ -103,13 +106,15 @@ public class InventoryAddition extends AppCompatActivity {
 
         save.setOnClickListener(view -> {
             //get user input
-            String name = itemName.getText().toString().trim();
-            String price = itemPrice.getText().toString().trim();
-            String quantity = itemQuantity.getText().toString().trim();
+             name = Objects.requireNonNull(itemName.getText()).toString().trim();
+             price = Objects.requireNonNull(itemPrice.getText()).toString().trim();
+             quantity = Objects.requireNonNull(itemQuantity.getText()).toString().trim();
+             desc = Objects.requireNonNull(description.getText()).toString().trim();
+             selectedCategory = category.getSelectedItem().toString();
 
 
             //save details to firestore
-            if (name.isEmpty() || price.isEmpty() || quantity.isEmpty() || imageUri == null) {
+            if (name.isEmpty() || price.isEmpty() || quantity.isEmpty() || imageUri == null || desc.isEmpty()) {
                 Toast.makeText(InventoryAddition.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }  else
@@ -227,12 +232,6 @@ public class InventoryAddition extends AppCompatActivity {
     // Save item details to Firestore
     public void saveProduct_Details(){
         //get selected category
-        String selectedCategory = category.getSelectedItem().toString();
-
-        //save details to firestore
-        String name = itemName.getText().toString().trim();
-        String price = itemPrice.getText().toString().trim();
-        String quantity = itemQuantity.getText().toString().trim();
 
         FirebaseUser user1 = mAuth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -242,7 +241,9 @@ public class InventoryAddition extends AppCompatActivity {
         item.put("price", price);
         item.put("quantity", quantity);
         item.put("category", selectedCategory);
+        item.put("description", desc);
         item.put("image", imageUrl);
+        item.put("soldQuantity", "0");
         db.collection("Products").document("Fertilizer").collection("Available").add(item)
                 .addOnSuccessListener(documentReference -> {
                     String itemId = documentReference.getId(); // Get the generated unique ID
