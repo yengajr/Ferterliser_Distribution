@@ -52,7 +52,7 @@ public class Items_Cart extends AppCompatActivity {
 
         checkout.setOnClickListener(v -> {
             // move to the checkout page
-          //  startActivity(new Intent(Items_Cart.this, CheckoutPage.class));
+            startActivity(new Intent(Items_Cart.this, CheckoutPage.class));
 
         });
 

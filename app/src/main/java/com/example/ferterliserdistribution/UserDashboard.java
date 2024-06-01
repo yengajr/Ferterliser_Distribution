@@ -45,10 +45,11 @@ public class UserDashboard extends AppCompatActivity {
     private SwipeRefreshLayout mySwipeRefreshLayout;
     ItemsAdapter itemsAdapter;
     ArrayList<Product> productArrayList;
+    ArrayList<AnnouncementClass> announcementArrayList;
     FirebaseFirestore db;
     private FirebaseAuth mAuth;
     Dialog dialog;
-    String userId;
+    String userId, imageUrl, announcementText1;
 
     private boolean doubleBackToExitPressedOnce = false;
     private static final int BACK_PRESS_DELAY = 2000; // 2 second
@@ -88,7 +89,9 @@ public class UserDashboard extends AppCompatActivity {
         mySwipeRefreshLayout = findViewById(R.id.main);
         cart_count = findViewById(R.id.cart_count);
         btn_cart = findViewById(R.id.cart1);
-        //current_total1 = findViewById(R.id.current_total1);
+        current_total1 = findViewById(R.id.current_total);
+
+        announcementArrayList = new ArrayList<>();
 
         // Initialize firebase
         db = FirebaseFirestore.getInstance();
@@ -106,10 +109,25 @@ public class UserDashboard extends AppCompatActivity {
         dialog.show();
 
         // Set the texts
-        announcementText.setText("Welcome to the Fertiliser Distribution App!");
+        announcementText.setText("announcementText1");
+
+
+        announcementImage.setOnClickListener(v -> {
+            //log out
+            mAuth.signOut();
+                startActivity(new Intent(UserDashboard.this, Login.class));
+                finish();
+
+        });
 
         // Set the cart button listener
         btn_cart.setOnClickListener(v -> {
+            // Move to the cart page
+            startActivity(new Intent(UserDashboard.this, Items_Cart.class));
+        });
+
+        //click listener for current_total1
+        current_total1.setOnClickListener(v -> {
             // Move to the cart page
             startActivity(new Intent(UserDashboard.this, Items_Cart.class));
         });
@@ -147,19 +165,42 @@ public class UserDashboard extends AppCompatActivity {
         // Get the data from firebase
         EventChangeListener();
         CurrentUserDetails();
-       // AnnouncementData();
+        AnnouncementData();
 
     }
     //get announcement data and set the image
     private void AnnouncementData() {
 
-        db.collection("Announcement").document("announcement").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                announcementText.setText(task.getResult().getString("announcement"));
-                Glide.with(UserDashboard.this).load(task.getResult().getString("image")).placeholder(R.drawable.blue_circle).into(announcementImage);
+        //get Announcements using AnnouncementClass and announcementArrayList
+        db.collection("Announcements").addSnapshotListener((value, error) -> {
+            if (error != null) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                return;
+            }
+            assert value != null;
+            announcementArrayList.addAll(value.toObjects(AnnouncementClass.class));
 
+            //compare values in Number and display details of that with largest number
+            int max = 0;
+            for (int i = 0; i < announcementArrayList.size(); i++) {
+                if (announcementArrayList.get(i).getNumber() > max) {
+                    max = announcementArrayList.get(i).getNumber();
+                    imageUrl = announcementArrayList.get(i).getImageUrl();
+                    announcementText1 = announcementArrayList.get(i).getAnnouncement();
+
+                    //set the values
+                    announcementText.setText(announcementText1);
+                    Glide.with(UserDashboard.this).load(imageUrl).into(announcementImage);
+
+                }
+            }
+            if (dialog.isShowing()) {
+                dialog.dismiss();
             }
         });
+
     }
 
     // Filter the list of products

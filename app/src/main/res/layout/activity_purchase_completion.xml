@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PurchaseCompletion">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_above="@+id/sale_completion"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/done_icon"
+            android:background="@drawable/round_icon"
+            android:id="@+id/back_button"
+            android:contentDescription="Done icon"
+            />
+
+        <TextView
+            android:id="@+id/sale_completion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_centerInParent="true"
+            android:textSize="30sp"
+            android:text="Purchase Completed"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/sale_completion"
+            android:textAlignment="center"
+            android:text="Thank you for shopping with us today \nWe hope to see you back soon"
+            />
+
+
+
+
+        <Button
+            android:id="@+id/new_sale_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/hyperlink"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_shape"
+            android:text="New Purchase"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/hyperlink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:text="Check My Orders"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</LinearLayout>

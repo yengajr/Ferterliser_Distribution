@@ -17,7 +17,7 @@
             android:id="@+id/appTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Admin Dashboard"
+            android:text="Add item"
             android:textSize="24sp"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -34,6 +34,29 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/appTitle"
             android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/announcementManagement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Announcements"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/itemManagement"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/announcementManagement"
+            android:layout_marginTop="16dp"/>
+
 
     </RelativeLayout>
 

@@ -10,9 +10,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class AdminDashboard extends AppCompatActivity {
 
-    TextView textView,textView1;
+    TextView textView,textView1,announcement,logout;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,10 @@ public class AdminDashboard extends AppCompatActivity {
 
         textView = findViewById(R.id.appTitle);
         textView1 = findViewById(R.id.itemManagement);
+        announcement = findViewById(R.id.announcementManagement);
+        logout = findViewById(R.id.logout);
+
+        mAuth = FirebaseAuth.getInstance();
 
         textView.setOnClickListener(v -> {
             // move to inventory_addition activity
@@ -37,6 +45,18 @@ public class AdminDashboard extends AppCompatActivity {
         textView1.setOnClickListener(v -> {
             // move to item_management activity
             startActivity(new Intent(AdminDashboard.this, InventoryManagement.class));
+        });
+
+        announcement.setOnClickListener(v -> {
+            // move to announcement_management activity
+            startActivity(new Intent(AdminDashboard.this, AnnouncementPage.class));
+        });
+
+        logout.setOnClickListener(v -> {
+            // move to login activity
+            mAuth.signOut();
+            startActivity(new Intent(AdminDashboard.this, Login.class));
+            finish();
         });
     }
 }

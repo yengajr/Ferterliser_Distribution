@@ -142,8 +142,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ProductViewH
             Product_Cart.getInstance().addToCart(product, count);
 
             // Display total in the Home_Page
-           // Home_Page.current_total1.setVisibility(View.VISIBLE);
-           // Home_Page.current_total1.setText("Total$: " + total);
+            UserDashboard.current_total1.setVisibility(View.VISIBLE);
+            UserDashboard.current_total1.setText(String.format("Total:Ksh %s", total));
 
 
             //enable display of cart count
