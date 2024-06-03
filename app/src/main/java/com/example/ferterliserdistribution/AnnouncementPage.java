@@ -158,7 +158,8 @@ public class AnnouncementPage extends AppCompatActivity {
                     // Announcement posted successfully
                     Toast.makeText(AnnouncementPage.this, "Announcement posted successfully", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                    finish();
+                    //finish();
+                    startActivity(new Intent(AnnouncementPage.this, AdminDashboard.class));
                 })
                 .addOnFailureListener(e -> {
                     // Handle the failure to post the announcement
