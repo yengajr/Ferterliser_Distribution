@@ -40,22 +40,19 @@ import java.util.Objects;
 public class CheckoutPage extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    TextView totalTextView,customerDetails,balance;
-    TextInputEditText email;
+    TextView totalTextView,customerDetails;
+    TextInputEditText email,phone;
     TextInputLayout emailHolder;
     ReceiptAdapter receiptAdapter;
     ArrayList<Product> cartItems = new ArrayList<>();
-    RadioGroup radioGroup;
-    LinearLayout linearLayout2, linearLayout3;
     Button checkoutButton;
-    EditText amountPaid;
 
     //firebase initialisations
     private FirebaseFirestore db ;
     private FirebaseUser user;
     private String userId;
     private FirebaseAuth mAuth;
-    String paymentMethod, emailAdress;
+    String  emailAddress,phoneNumber;
     Dialog dialog;
     String currentDate;
     ArrayList<Product> productArrayList;
@@ -68,14 +65,10 @@ public class CheckoutPage extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         totalTextView = findViewById(R.id.totalPrice);
         customerDetails = findViewById(R.id.customerDetails);
-        email = findViewById(R.id.phone_edit_text);
-        emailHolder = findViewById(R.id.textField_phone);
-        radioGroup = findViewById(R.id.paymentMethod);
+        email = findViewById(R.id.email_edit_text);
+        phone = findViewById(R.id.phone_edit_text);
+        emailHolder = findViewById(R.id.textField_email);
         checkoutButton = findViewById(R.id.checkoutButton);
-        linearLayout2 = findViewById(R.id.linear_Layout2);
-        linearLayout3 = findViewById(R.id.linear_Layout3);
-        amountPaid = findViewById(R.id.cashAmount);
-        balance = findViewById(R.id.balance);
         productArrayList = new ArrayList<>();
 
 
@@ -108,65 +101,37 @@ public class CheckoutPage extends AppCompatActivity {
         currentDate = dateFormat.format(new Date());
 
         //getting the payment method selected by the user
-        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.cash) {
-                Toast.makeText(this, "Cash", Toast.LENGTH_SHORT).show();
 
-                checkoutButton.setVisibility(View.GONE);
-                linearLayout2.setVisibility(View.VISIBLE);
-                linearLayout3.setVisibility(View.VISIBLE);
-
-                //automatically calculate the balance when the user types the amount paid
-                amountPaid.setOnKeyListener((v, keyCode, event) -> {
-                    //if its empty set do not do the calculation
-                    if (amountPaid.getText().toString().isEmpty()) {
-                        balance.setText("");
-                    }
-                    else {
-                        double total = Double.parseDouble(totalTextView.getText().toString());
-                        double paid = Double.parseDouble(amountPaid.getText().toString());
-                        double balance1 = paid - total;
-                        balance.setText(String.valueOf(balance1));
-
-                        if (balance1 < 0) {
-                            balance.setTextColor(getResources().getColor(R.color.red));
-                            checkoutButton.setVisibility(View.GONE);
-                        } else {
-                            balance.setTextColor(getResources().getColor(R.color.green));
-                            checkoutButton.setVisibility(View.VISIBLE);
-
-                        }
-                    }
-                    return false;
-                });
 
                 //checkout button click to call the checkout method
-                checkoutButton.setOnClickListener(v -> {
-                    CashCheckout();
+        checkoutButton.setOnClickListener(v -> {
 
-                });
+            //updateQuantities();
+            //get phone number and name and payment method selected
+            emailAddress = Objects.requireNonNull(email.getText()).toString();
+            phoneNumber = Objects.requireNonNull(phone.getText()).toString();
 
-            } else if (checkedId == R.id.mpesa) {
-                Toast.makeText(this, "Mpesa", Toast.LENGTH_SHORT).show();
-
-                //make linear layout 2 and 3 invisible
-                linearLayout2.setVisibility(View.GONE);
-                linearLayout3.setVisibility(View.GONE);
-                checkoutButton.setVisibility(View.VISIBLE);
-
-
-                //clear the balance text view and amount paid edit text
-                balance.setText("");
-                amountPaid.setText("");
-
-                //checkout button click to call the checkout method
-                checkoutButton.setOnClickListener(v -> {
-                    MpesaCheckout();
-
-                });
-
+            //validate the phone number and name and call the checkout method
+            if (emailAddress.isEmpty()) {
+                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+                //make the customer details visible
+                emailHolder.setVisibility(View.VISIBLE);
+            } else if (phoneNumber.isEmpty()) {
+                //request focus on the phone number field
+                phone.requestFocus();
+                Toast.makeText(this, "Fill in the number", Toast.LENGTH_SHORT).show();
+            } else if (phoneNumber.length() <10) {
+                //request focus on the phone number field
+                phone.requestFocus();
+                Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT).show();
+            } else {
+                customerOrders();
+                updateQuantities();
+                soldProducts();
             }
+
         });
+
 
         // Fetch item details from Product_Cart class
         Map<Product, Integer> selectedProductsMap = Product_Cart.getInstance().getSelectedProducts();
@@ -193,65 +158,12 @@ public class CheckoutPage extends AppCompatActivity {
 
     }
 
-    private void MpesaCheckout() {
-        //updateQuantities();
-        //get phone number and name and payment method selected
-        emailAdress = Objects.requireNonNull(email.getText()).toString();
-        paymentMethod = "";
-        if (radioGroup.getCheckedRadioButtonId() == R.id.cash) {
-            paymentMethod = "Cash";
-        } else if (radioGroup.getCheckedRadioButtonId() == R.id.mpesa) {
-            paymentMethod = "Mpesa";
-        }
-
-        //validate the phone number and name and call the checkout method
-        if (emailAdress.isEmpty()) {
-            Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
-            //make the customer details visible
-            emailHolder.setVisibility(View.VISIBLE);
-        } else {
-            customerOrders();
-            updateQuantities();
-            soldProducts();
-
-            //toast message for payment method
-            Toast.makeText(this, "Payment method selected is: " + paymentMethod, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void CashCheckout() {
-        //updateQuantities();
-        //get phone number and name and payment method selected
-        emailAdress = Objects.requireNonNull(email.getText()).toString();
-        paymentMethod = "";
-        if (radioGroup.getCheckedRadioButtonId() == R.id.cash) {
-            paymentMethod = "Cash";
-        } else if (radioGroup.getCheckedRadioButtonId() == R.id.mpesa) {
-            paymentMethod = "Mpesa";
-        }
-
-
-        //validate the phone number and name and call the checkout method
-        if (emailAdress.isEmpty()) {
-            Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
-            //make the customer details visible
-            emailHolder.setVisibility(View.VISIBLE);
-        } else {
-            customerOrders();
-            updateQuantities();
-            soldProducts();
-
-            //toast message for payment method
-            Toast.makeText(this, "Payment method selected is: " + paymentMethod, Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void soldProducts() {
         for (final Product product : cartItems) {
             Map<String, Object> soldData = new HashMap<>();
             soldData.put("productName", product.getName());
             soldData.put("itemCount", product.getItemCount());
-            soldData.put("paymentMethod", paymentMethod);
+            soldData.put("paymentNumber", phoneNumber);
             soldData.put("totalPrice", product.getItemTotal());
 
             db.collection("SalesReport")
@@ -286,15 +198,15 @@ public class CheckoutPage extends AppCompatActivity {
             Map<String, Object> orderData = new HashMap<>();
             orderData.put("productName", product.getName());
             orderData.put("itemCount", product.getItemCount());
-            orderData.put("paymentMethod", paymentMethod);
-            orderData.put("emailAddress", emailAdress);
+            orderData.put("paymentNumber", phoneNumber);
+            orderData.put("emailAddress", emailAddress);
             orderData.put("orderDate", currentDate);
             orderData.put("productCategory", product.getCategory());
             orderData.put("served", 0);
 
             db.collection("Orders")
                     .document("Customer")
-                    .collection(emailAdress)
+                    .collection(emailAddress)
                     .add(orderData)
                     .addOnSuccessListener(documentReference -> {
 
@@ -303,7 +215,7 @@ public class CheckoutPage extends AppCompatActivity {
 
                     db.collection("Orders")
                             .document("Customer")
-                            .collection(emailAdress)
+                            .collection(emailAddress)
                             .document(itemId)
                             .set(orderData)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {

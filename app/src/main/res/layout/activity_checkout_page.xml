@@ -31,19 +31,37 @@
         />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textField_phone"
+        android:id="@+id/textField_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/customerDetails"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:visibility="gone"
         android:hint="Email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textField_email"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Phone Number">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            android:inputType="phone"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,44 +80,6 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         />
 
-    <TextView
-        android:id="@+id/paymentMethodTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Payment Method"
-        android:layout_above="@+id/paymentMethod"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        />
-
-    <RadioGroup
-        android:id="@+id/paymentMethod"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_above="@+id/linear_Layout"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        >
-        <RadioButton
-            android:id="@+id/cash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cash"
-            android:textStyle="bold"
-            android:layout_marginEnd="10dp"
-            />
-        <RadioButton
-            android:id="@+id/mpesa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mpesa"
-            android:textStyle="bold"
-            android:layout_marginEnd="10dp"
-            />
-    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -147,78 +127,12 @@
                 android:textColor="@color/black"
                 />
         </LinearLayout>
-        <LinearLayout
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/linear_Layout2"
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            >
-            <TextView
-                android:id="@+id/totalItemsValue"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Cash Amount"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_weight="1"
-                />
 
-            <EditText
-                android:id="@+id/cashAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:hint="0.0"
-                android:inputType="number"
-                android:background="@drawable/spinner_design"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/linear_Layout3"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Balance"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_weight="1"
-                />
-
-            <TextView
-                android:id="@+id/balance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.0"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                />
-        </LinearLayout>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/checkoutButton"
             android:text="Pay Now"
-            android:visibility="gone"
             android:layout_gravity="center"
             android:background="@drawable/button_shape"
             android:layout_marginTop="3dp"
