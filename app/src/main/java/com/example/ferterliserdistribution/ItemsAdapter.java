@@ -1,6 +1,7 @@
 package com.example.ferterliserdistribution;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ProductViewH
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productArrayList.get(position);
         holder.productName.setText(product.name);
-        holder.productPrice.setText(String.format("Ksh:%s", product.price));
+        holder.productPrice.setText(product.price);
         holder.categoryTextView.setText(product.category);
         holder.itemIdTextView.setText(product.itemId);
         holder.itemQuantityTextView.setText(product.quantity);
@@ -111,45 +112,25 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ProductViewH
                 return;
             }
             else {
-                if (count == 0) {
-                    countTextView.setVisibility(View.GONE);
-                } else {
-                    countTextView.setVisibility(View.VISIBLE);
-                    countMap.put(product, count);
-                    countTextView.setText(String.valueOf(count));
-                }
 
-                //toast name of selected product if it does not exist in the cart
-                if (!Product_Cart.getInstance().getSelectedProducts().containsKey(product)) {
-                    Toast.makeText(v.getContext(), productName.getText().toString() + " added to cart", Toast.LENGTH_SHORT).show();
-                }
+                //pass the product details  to product details
+                Intent intent = new Intent(v.getContext(), ProductDetails.class);
+                intent.putExtra("productName", productName.getText().toString());
+                intent.putExtra("productPrice", productPrice.getText().toString());
+                intent.putExtra("productQuantity", itemQuantityTextView.getText().toString());
+                intent.putExtra("productId", itemIdTextView.getText().toString());
+                intent.putExtra("productCategory", categoryTextView.getText().toString());
+                intent.putExtra("productRating", productRating.getText().toString());
+                intent.putExtra("productDescription", product.description);
+                intent.putExtra("productImage", product.image);
+                v.getContext().startActivity(intent);
 
             }
 
-
-
-            //calculate the total price for each selected product
-            double total = 0;
-            for (Map.Entry<Product, Integer> entry : countMap.entrySet()) {
-                Product p = entry.getKey();
-                int selectedCount = entry.getValue();
-                total += selectedCount * Double.parseDouble(p.price);
-            }
-
-            // Add the selected product to the cart
+           /* // Add the selected product to the cart
             product.setItemTotal(String.valueOf(Double.parseDouble(product.price) * count));
             product.setItemCount(String.valueOf(count));
-            Product_Cart.getInstance().addToCart(product, count);
-
-            // Display total in the Home_Page
-            UserDashboard.current_total1.setVisibility(View.VISIBLE);
-            UserDashboard.current_total1.setText(String.format("Total:Ksh %s", total));
-
-
-            //enable display of cart count
-            UserDashboard.cart_count.setVisibility(View.VISIBLE);
-            UserDashboard.cart_count.setText(String.valueOf(Product_Cart.getInstance().getSelectedProducts().size()));
-
+            Product_Cart.getInstance().addToCart(product, count);*/
         }
     }
 

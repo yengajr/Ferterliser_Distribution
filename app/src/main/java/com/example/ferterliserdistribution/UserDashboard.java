@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -38,7 +39,7 @@ public class UserDashboard extends AppCompatActivity {
 
     TextView username, announcementText;
     ImageButton btn_navigation, btn_cart, btn_logout;
-    static TextView cart_count,current_total1;
+    TextView cart_count,current_total1;
     RecyclerView recyclerView;
     ShapeableImageView announcementImage;
     SearchView searchView;
@@ -138,6 +139,20 @@ public class UserDashboard extends AppCompatActivity {
             itemsAdapter = new ItemsAdapter(UserDashboard.this, productArrayList);
             recyclerView.setAdapter(itemsAdapter);
             mySwipeRefreshLayout.setRefreshing(false);
+
+
+
+            //check if cart is empty
+            if (Product_Cart.getInstance().getSelectedProducts().size() == 0) {
+                //make cart count invisible
+                cart_count.setVisibility(View.INVISIBLE);
+
+            } else {
+                //make cart count visible
+                cart_count.setVisibility(View.VISIBLE);
+                //set the cart count
+                cart_count.setText(String.valueOf(Product_Cart.getInstance().getSelectedProducts().size()));
+            }
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -166,6 +181,9 @@ public class UserDashboard extends AppCompatActivity {
         EventChangeListener();
         CurrentUserDetails();
         AnnouncementData();
+
+        // Set the cart count
+        cart_count.setText(String.valueOf(Product_Cart.getInstance().getSelectedProducts().size()));
 
     }
     //get announcement data and set the image
