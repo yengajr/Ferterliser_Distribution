@@ -32,7 +32,6 @@ public class ProductDetails extends AppCompatActivity {
     TextView productName, productPrice, productQuantity, productId, productCategory, productDescription,ratings;
     ShapeableImageView productImage;
     Button addToCart;
-    ArrayList<Product> productArrayList;
     Product product;
 
     @Override
@@ -101,6 +100,10 @@ public class ProductDetails extends AppCompatActivity {
                     if (count > quantity1) {
                         Toast.makeText(v.getContext(), "No more " + productName.getText().toString()+" available", Toast.LENGTH_SHORT).show();
                         return;
+                    }
+                    // Check if the product already exists in the cart
+                    if (Product_Cart.getInstance().checkExistingItem(productId.getText().toString())) {
+                        Toast.makeText(v.getContext(), "Item already in cart", Toast.LENGTH_SHORT).show();
                     }
                     else {
 

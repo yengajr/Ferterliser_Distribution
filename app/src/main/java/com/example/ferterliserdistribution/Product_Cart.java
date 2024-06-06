@@ -66,5 +66,16 @@ public class Product_Cart {
         product.setSoldQuantity(String.valueOf(soldQuantity));
     }
 
+    //check already existing item using its id
+    public boolean checkExistingItem(String id) {
+        for (Map.Entry<Product, Integer> entry : selectedProducts.entrySet()) {
+            Product product = entry.getKey();
+            if (product.getItemId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 

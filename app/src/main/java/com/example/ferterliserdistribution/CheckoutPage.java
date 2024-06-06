@@ -54,7 +54,7 @@ public class CheckoutPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String  emailAddress,phoneNumber;
     Dialog dialog;
-    String currentDate;
+    String currentDate, currentTime;
     ArrayList<Product> productArrayList;
 
     @Override
@@ -99,6 +99,10 @@ public class CheckoutPage extends AppCompatActivity {
         //getting current date
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         currentDate = dateFormat.format(new Date());
+
+        //get current time
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+        currentTime = timeFormat.format(new Date());
 
         //getting the payment method selected by the user
 
@@ -202,11 +206,13 @@ public class CheckoutPage extends AppCompatActivity {
             orderData.put("emailAddress", emailAddress);
             orderData.put("orderDate", currentDate);
             orderData.put("productCategory", product.getCategory());
-            orderData.put("served", 0);
+            orderData.put("served", "0");
+            orderData.put("orderTime", currentTime);
+            orderData.put("orderAddress", "Kimathi");
 
             db.collection("Orders")
                     .document("Customer")
-                    .collection(emailAddress)
+                    .collection("order")
                     .add(orderData)
                     .addOnSuccessListener(documentReference -> {
 
@@ -215,7 +221,7 @@ public class CheckoutPage extends AppCompatActivity {
 
                     db.collection("Orders")
                             .document("Customer")
-                            .collection(emailAddress)
+                            .collection("order")
                             .document(itemId)
                             .set(orderData)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {

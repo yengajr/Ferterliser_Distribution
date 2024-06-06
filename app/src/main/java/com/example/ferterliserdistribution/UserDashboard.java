@@ -115,9 +115,12 @@ public class UserDashboard extends AppCompatActivity {
 
         announcementImage.setOnClickListener(v -> {
             //log out
-            mAuth.signOut();
+           /* mAuth.signOut();
                 startActivity(new Intent(UserDashboard.this, Login.class));
-                finish();
+                finish();*/
+
+            // Move to the myorders page
+            startActivity(new Intent(UserDashboard.this, MyOrders.class));
 
         });
 
@@ -141,17 +144,22 @@ public class UserDashboard extends AppCompatActivity {
             mySwipeRefreshLayout.setRefreshing(false);
 
 
-
             //check if cart is empty
-            if (Product_Cart.getInstance().getSelectedProducts().size() == 0) {
+            if (Product_Cart.getInstance().getSelectedProducts().isEmpty()) {
                 //make cart count invisible
                 cart_count.setVisibility(View.INVISIBLE);
+                current_total1.setVisibility(View.INVISIBLE);
 
             } else {
                 //make cart count visible
                 cart_count.setVisibility(View.VISIBLE);
+                current_total1.setVisibility(View.VISIBLE);
                 //set the cart count
                 cart_count.setText(String.valueOf(Product_Cart.getInstance().getSelectedProducts().size()));
+                //set the total price
+                double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
+                String totalPrice1 = String.valueOf(totalPrice);
+                current_total1.setText("Total Ksh: " + totalPrice1);
             }
         });
 
@@ -182,8 +190,23 @@ public class UserDashboard extends AppCompatActivity {
         CurrentUserDetails();
         AnnouncementData();
 
-        // Set the cart count
-        cart_count.setText(String.valueOf(Product_Cart.getInstance().getSelectedProducts().size()));
+        //check if cart is empty
+        if (Product_Cart.getInstance().getSelectedProducts().isEmpty()) {
+            //make cart count invisible
+            cart_count.setVisibility(View.INVISIBLE);
+            current_total1.setVisibility(View.INVISIBLE);
+
+        } else {
+            //make cart count visible
+            cart_count.setVisibility(View.VISIBLE);
+            current_total1.setVisibility(View.VISIBLE);
+            //set the cart count
+            cart_count.setText(String.valueOf(Product_Cart.getInstance().getSelectedProducts().size()));
+            //set the total price
+            double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
+            String totalPrice1 = String.valueOf(totalPrice);
+            current_total1.setText("Total Ksh: " + totalPrice1);
+        }
 
     }
     //get announcement data and set the image

@@ -1,0 +1,90 @@
+package com.example.ferterliserdistribution;
+
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ProductViewHolder>{
+
+    private final ArrayList<Order> orderArrayList;
+    private final LayoutInflater inflater;
+    private final Context context;
+
+    public OrdersAdapter(Context context, ArrayList<Order> orderArrayList) {
+        this.context = context;
+        this.orderArrayList = orderArrayList;
+        inflater = LayoutInflater.from(context);
+    }
+
+    @NonNull
+    @Override
+    public OrdersAdapter.ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = inflater.inflate(R.layout.orders_card, parent, false);
+        return new ProductViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull OrdersAdapter.ProductViewHolder holder, int position) {
+        Order order = orderArrayList.get(position);
+        holder.orderId.setText(order.itemId);
+        holder.orderDate.setText(order.orderDate);
+        //get value of status
+        String status = order.served;
+        if (status.equals("0")){
+            holder.orderStatus.setText("Received");
+        }else if (status.equals("1")){
+            holder.orderStatus.setText("Processed");
+        }
+        holder.orderName.setText(order.productName);
+        holder.orderAddress.setText(order.orderAddress);
+        holder.orderTime.setText(order.orderTime);
+        holder.orderCount.setText("Count: "+order.itemCount);
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open update page and pass product info
+                Intent intent = new Intent(context, OrderStatus.class);
+                intent.putExtra("orderId", order.itemId);
+                intent.putExtra("orderDate", order.orderDate);
+                intent.putExtra("orderStatus", order.served);
+                intent.putExtra("orderName", order.productName);
+                intent.putExtra("orderAddress", order.orderAddress);
+                intent.putExtra("orderTime", order.orderTime);
+                context.startActivity(intent);
+            }
+        });
+
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return orderArrayList.size();
+    }
+
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
+        TextView orderId, orderDate, orderStatus, orderName,orderAddress,orderTime,orderCount;
+
+        public ProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+            orderId = itemView.findViewById(R.id.id);
+            orderDate = itemView.findViewById(R.id.order_date);
+            orderStatus = itemView.findViewById(R.id.order_status);
+            orderName = itemView.findViewById(R.id.order_name);
+            orderAddress = itemView.findViewById(R.id.order_address);
+            orderTime = itemView.findViewById(R.id.order_time);
+            orderCount = itemView.findViewById(R.id.order_count);
+        }
+    }
+
+}

@@ -75,6 +75,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                     //calculate sold quantity of product
                     Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
 
+                    //set total price
+                    double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
+                    String totalPrice1 = String.valueOf(totalPrice);
+                    Items_Cart.total_price.setText(String.format("Ksh%s", totalPrice1));
+
                 } else {
                     Toast.makeText(v.getContext(), "Item count cannot be less than 1", Toast.LENGTH_SHORT).show();
                 }
@@ -113,6 +118,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                     //calculate sold quantity of product
                     Product_Cart.getInstance().calculateSoldQuantity(cardItem, count);
 
+                    //set total price
+                    double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
+                    String totalPrice1 = String.valueOf(totalPrice);
+                    Items_Cart.total_price.setText(String.format("Ksh%s", totalPrice1));
+
                 }
                 else {
                     Toast.makeText(v.getContext(), "No more"+cardItem.getName()+"available", Toast.LENGTH_SHORT).show();
@@ -140,6 +150,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
                 //calculate remaining quantity of product
                 Product_Cart.getInstance().calculateRemainingQuantity(cardItem, count);
 
+                //set total price
+                double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
+                String totalPrice1 = String.valueOf(totalPrice);
+                Items_Cart.total_price.setText(String.format("Ksh%s", totalPrice1));
             }
         });
 
