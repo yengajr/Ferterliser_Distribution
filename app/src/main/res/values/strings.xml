@@ -8,4 +8,41 @@
         <item>Distributor</item>
         <item>Delivery</item>
     </string-array>
+
+    <!-- res/values/strings.xml -->
+    <string-array name="locations_array">
+        <item>Nairobi</item>
+        <item>Mombasa</item>
+        <item>Kisumu</item>
+        <item>Nakuru</item>
+        <item>Eldoret</item>
+        <item>Thika</item>
+        <item>Kitale</item>
+        <item>Nyeri</item>
+        <item>Machakos</item>
+        <item>Meru</item>
+        <item>Kisii</item>
+        <item>Embu</item>
+        <item>Kakamega</item>
+        <item>Garissa</item>
+        <item>Voi</item>
+        <item>Nyamira</item>
+        <item>Naivasha</item>
+        <item>Kericho</item>
+        <item>Malindi</item>
+        <item>Bungoma</item>
+        <item>Busia</item>
+        <item>Isiolo</item>
+        <item>Nanyuki</item>
+        <item>Wajir</item>
+        <item>Lamu</item>
+        <item>Maralal</item>
+        <item>Kajiado</item>
+        <item>Kilifi</item>
+        <item>Loitoktok</item>
+        <item>Mandera</item>
+        <item>Marsabit</item>
+        <item>Moyale</item>
+    </string-array>
+
 </resources>

@@ -112,6 +112,11 @@ public class UserDashboard extends AppCompatActivity {
         // Set the texts
         announcementText.setText("announcementText1");
 
+        announcementText.setOnClickListener(v -> {
+            // Move to the myorders page
+            startActivity(new Intent(UserDashboard.this, CustomerDetails.class));
+        });
+
 
         announcementImage.setOnClickListener(v -> {
             //log out

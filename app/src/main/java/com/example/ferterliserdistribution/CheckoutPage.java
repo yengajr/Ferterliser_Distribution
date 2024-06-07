@@ -40,9 +40,7 @@ import java.util.Objects;
 public class CheckoutPage extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    TextView totalTextView,customerDetails;
-    TextInputEditText email,phone;
-    TextInputLayout emailHolder;
+    TextView totalTextView;
     ReceiptAdapter receiptAdapter;
     ArrayList<Product> cartItems = new ArrayList<>();
     Button checkoutButton;
@@ -52,7 +50,7 @@ public class CheckoutPage extends AppCompatActivity {
     private FirebaseUser user;
     private String userId;
     private FirebaseAuth mAuth;
-    String  emailAddress,phoneNumber;
+    String  emailAddress,phoneNumber,orderAddress;
     Dialog dialog;
     String currentDate, currentTime;
     ArrayList<Product> productArrayList;
@@ -64,10 +62,6 @@ public class CheckoutPage extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         totalTextView = findViewById(R.id.totalPrice);
-        customerDetails = findViewById(R.id.customerDetails);
-        email = findViewById(R.id.email_edit_text);
-        phone = findViewById(R.id.phone_edit_text);
-        emailHolder = findViewById(R.id.textField_email);
         checkoutButton = findViewById(R.id.checkoutButton);
         productArrayList = new ArrayList<>();
 
@@ -78,17 +72,15 @@ public class CheckoutPage extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         userId = Objects.requireNonNull(user).getUid();
 
-        //get phone number from user details in the database
-        db.collection("users")
-                .document(userId)
-                .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        String phone = documentSnapshot.getString("email");
-                        emailHolder.getEditText().setText(phone);
-                    }
-                });
+        //get values from previous activity
+        Intent intent = getIntent();
+        String phone = intent.getStringExtra("phone");
+        String email = intent.getStringExtra("email");
+        String location = intent.getStringExtra("location");
+        String deliveryFees = intent.getStringExtra("deliveryFees");
 
+        //toast delivery charge
+        Toast.makeText(this, deliveryFees, Toast.LENGTH_SHORT).show();
 
         //progress dialog
         dialog = new MaterialAlertDialogBuilder(this)
@@ -104,36 +96,18 @@ public class CheckoutPage extends AppCompatActivity {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         currentTime = timeFormat.format(new Date());
 
-        //getting the payment method selected by the user
 
 
-                //checkout button click to call the checkout method
+        //checkout button click to call the checkout method
         checkoutButton.setOnClickListener(v -> {
 
-            //updateQuantities();
-            //get phone number and name and payment method selected
-            emailAddress = Objects.requireNonNull(email.getText()).toString();
-            phoneNumber = Objects.requireNonNull(phone.getText()).toString();
+            emailAddress = email;
+            phoneNumber = phone;
+            orderAddress = location;
 
-            //validate the phone number and name and call the checkout method
-            if (emailAddress.isEmpty()) {
-                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
-                //make the customer details visible
-                emailHolder.setVisibility(View.VISIBLE);
-            } else if (phoneNumber.isEmpty()) {
-                //request focus on the phone number field
-                phone.requestFocus();
-                Toast.makeText(this, "Fill in the number", Toast.LENGTH_SHORT).show();
-            } else if (phoneNumber.length() <10) {
-                //request focus on the phone number field
-                phone.requestFocus();
-                Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT).show();
-            } else {
                 customerOrders();
                 updateQuantities();
                 soldProducts();
-            }
-
         });
 
 
@@ -154,11 +128,12 @@ public class CheckoutPage extends AppCompatActivity {
 
         // Calculate total price of all items in the cart
         double totalPrice = Product_Cart.getInstance().calculateTotalPrice();
+        //add the delivery charge to the total price
+        double total = totalPrice + Double.parseDouble(deliveryFees);
         //convert the total price to string
-        String totalPrice1 = String.valueOf(totalPrice);
+        String totalPrice1 = String.valueOf(total);
 
         totalTextView.setText(totalPrice1);
-
 
     }
 
@@ -208,7 +183,7 @@ public class CheckoutPage extends AppCompatActivity {
             orderData.put("productCategory", product.getCategory());
             orderData.put("served", "0");
             orderData.put("orderTime", currentTime);
-            orderData.put("orderAddress", "Kimathi");
+            orderData.put("orderAddress", orderAddress);
 
             db.collection("Orders")
                     .document("Customer")

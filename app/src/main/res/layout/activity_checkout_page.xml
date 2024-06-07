@@ -18,54 +18,6 @@
         android:textSize="30sp"
         android:textStyle="bold"
         />
-    <TextView
-        android:id="@+id/customerDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/light_blue"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:text="My Deatails"
-        android:layout_below="@id/checkoutTitle"
-        />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textField_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/customerDetails"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:visibility="gone"
-        android:hint="Email">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textField_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textField_email"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Phone Number">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phone_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -76,7 +28,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:scrollbars="vertical"
-        android:layout_below="@id/textField_phone"
+        android:layout_below="@id/checkoutTitle"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         />
 
@@ -106,9 +58,9 @@
             >
             <TextView
                 android:id="@+id/totalItems"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Total Price"
+                android:text="Total Price + Shipping"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"

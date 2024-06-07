@@ -11,9 +11,126 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#106309"
         android:layout_centerInParent="true">
 
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/customer_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name: "
+            android:layout_below="@+id/logo"
+            android:textSize="22sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"/>
+
+
+        <TextView
+            android:id="@+id/customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer Name"
+            android:layout_below="@+id/logo"
+            android:layout_toRightOf="@+id/customer_name_label"
+            android:textSize="22sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/customer_email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: "
+            android:layout_below="@id/customer_name"
+            android:textSize="22sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/customer_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer Email"
+            android:textSize="22sp"
+            android:layout_below="@id/customer_name"
+            android:layout_toEndOf="@+id/customer_email_label"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/customer_phone_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/customer_email"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Customer Phone"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/customer_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                 />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <!-- res/values/strings.xml -->
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_below="@+id/customer_phone_layout"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:completionThreshold="1"
+            android:background="@drawable/textview_design"
+            android:hint="Select Location" />
+
+        <TextView
+            android:id="@+id/delivery_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delivery Fee: "
+            android:textSize="22sp"
+            android:layout_below="@id/autoCompleteTextView"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/delivery_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ksh 200"
+            android:textSize="22sp"
+            android:layout_toRightOf="@+id/delivery_fee"
+            android:layout_below="@id/autoCompleteTextView"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"/>
+
+        <Button
+            android:id="@+id/proceed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proceed to Payment"
+            android:layout_below="@id/delivery_cost"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_design"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"/>
 
     </RelativeLayout>
 
