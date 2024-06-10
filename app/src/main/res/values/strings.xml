@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">Ferterliser Distribution</string>
+    <string name="app_name">Fertilizer Distribution</string>
     <string name="get_started">Get Started</string>
+    <string name="popular_brands">Popular Brands</string>
+    <string name="_0_0">0.0</string>
+    <string name="today">Today</string>
+    <string name="_55">55</string>
+    <string name="cart_button">cart_button</string>
+    <string name="user_name">User Name</string>
+    <string name="welcome">Welcome</string>
 
     <string-array name="role_array">
         <item>Admin</item>

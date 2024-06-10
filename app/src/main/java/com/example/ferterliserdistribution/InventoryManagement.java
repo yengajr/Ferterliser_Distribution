@@ -81,8 +81,7 @@ public class InventoryManagement extends AppCompatActivity {
 
         back = findViewById(R.id.back);
         back.setOnClickListener(v -> {
-            Intent intent = new Intent(InventoryManagement.this, AdminDashboard.class);
-            startActivity(intent);
+            finish();
         });
 
 

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminNavigation">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/adminTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Navigation"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            />
+
+            <LinearLayout
+                android:id="@+id/linear_Layout_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/navigation_button_design"
+                android:layout_below="@id/adminTitle"
+                >
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/home"
+                    android:layout_gravity="center"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ADMIN\nDASHBOARD"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_Layout_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/linear_Layout_home"
+                android:background="@drawable/navigation_button_design"
+                >
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/order"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ORDER\nPROCESSING"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_Layout_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/linear_Layout_order"
+                android:background="@drawable/navigation_button_design"
+                >
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/sales"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SALES\nMONITORING"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_Layout_inventory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/navigation_button_design"
+            android:layout_below="@id/adminTitle"
+            android:layout_alignParentEnd="true"
+            >
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/inventory"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INVERNTORY\nMANAGEMENT"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_Layout_announcement"
+            android:layout_width="158dp"
+            android:layout_height="167dp"
+            android:layout_below="@+id/linear_Layout_home"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/navigation_button_design"
+            android:orientation="vertical">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/announcement" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAKE\nANNOUNCEMENT"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_Layout_logout"
+            android:layout_width="154dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_Layout_order"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/navigation_button_design"
+            android:orientation="vertical">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/logout" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="LOG OUT"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

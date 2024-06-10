@@ -1,0 +1,99 @@
+package com.example.ferterliserdistribution;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class Order_ProcessingAdapter extends RecyclerView.Adapter<Order_ProcessingAdapter.ProductViewHolder>{
+
+    private final ArrayList<Order> orderArrayList;
+    private final LayoutInflater inflater;
+    private final Context context;
+
+    public Order_ProcessingAdapter(Context context, ArrayList<Order> orderArrayList) {
+        this.context = context;
+        this.orderArrayList = orderArrayList;
+        inflater = LayoutInflater.from(context);
+    }
+
+    @NonNull
+    @Override
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = inflater.inflate(R.layout.orders_card, parent, false);
+        return new ProductViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+        Order order = orderArrayList.get(position);
+        holder.orderId.setText(order.itemId);
+        holder.orderDate.setText(order.orderDate);
+        //get value of status
+        String status = order.served;
+        switch (status) {
+            case "0":
+                //change text color to blue
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.blue));
+                holder.orderStatus.setText("Placed");
+                break;
+            case "1":
+                //change text color to green
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.magenta));
+                holder.orderStatus.setText("Accepted");
+                break;
+            case "2":
+                //change text color to yellow
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.yellow));
+                holder.orderStatus.setText("Processed");
+                break;
+            case "3":
+                //change text color to orange
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.orange));
+                holder.orderStatus.setText("Dispatched");
+                break;
+            case "4":
+                //change text color to green
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.green));
+                holder.orderStatus.setText("Delivered");
+                break;
+            default:
+                //change text color to red
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.red));
+                holder.orderStatus.setText("Cancelled");
+                break;
+        }
+
+        holder.orderName.setText(order.productName);
+        holder.orderAddress.setText(order.orderAddress);
+        holder.orderTime.setText(order.orderTime);
+        holder.orderCount.setText("Count: "+order.itemCount);
+        holder.orderId.setText(order.itemId);
+    }
+
+    @Override
+    public int getItemCount() {
+        return orderArrayList.size();
+    }
+
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
+        TextView orderId, orderDate, orderStatus, orderName, orderAddress, orderTime, orderCount;
+
+        public ProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+            orderId = itemView.findViewById(R.id.id);
+            orderDate = itemView.findViewById(R.id.order_date);
+            orderStatus = itemView.findViewById(R.id.order_status);
+            orderName = itemView.findViewById(R.id.order_name);
+            orderAddress = itemView.findViewById(R.id.order_address);
+            orderTime = itemView.findViewById(R.id.order_time);
+            orderCount = itemView.findViewById(R.id.order_count);
+        }
+    }
+}

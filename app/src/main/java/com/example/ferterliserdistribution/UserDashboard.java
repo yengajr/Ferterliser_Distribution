@@ -113,8 +113,10 @@ public class UserDashboard extends AppCompatActivity {
         announcementText.setText("announcementText1");
 
         announcementText.setOnClickListener(v -> {
-            // Move to the myorders page
-            startActivity(new Intent(UserDashboard.this, CustomerDetails.class));
+            //log out
+            mAuth.signOut();
+            startActivity(new Intent(UserDashboard.this, Login.class));
+            finish();
         });
 
 

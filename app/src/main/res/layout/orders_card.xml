@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_marginBottom="10dp"
     android:layout_gravity="center_vertical"
-    android:layout_height="130dp">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +16,10 @@
             android:id="@+id/order_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/order_date"
+            android:layout_marginTop="2dp"
             android:text="Name"
+            android:textStyle="bold"
             android:textSize="22sp" />
 
         <TextView
@@ -24,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/order_name"
+            android:layout_marginTop="2dp"
             android:text="Count"
             android:textSize="22sp" />
 
@@ -31,8 +35,7 @@
             android:id="@+id/order_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:drawableStart="@drawable/status_icon"
+            android:layout_alignParentEnd="true"
             android:text="Status"
             android:textSize="22sp" />
 
@@ -41,25 +44,16 @@
             android:id="@+id/order_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/order_status"
-            android:text="Address"
-            android:drawableStart="@drawable/location_icon"
-            android:textSize="22sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/order_date"
+            android:layout_below="@+id/order_count"
             android:layout_alignParentEnd="true"
-            android:text="Order Date"
+            android:layout_marginTop="2dp"
+            android:text="Address"
             android:textSize="22sp" />
 
         <TextView
             android:id="@+id/order_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/order_time"
             android:layout_marginEnd="10dp"
             android:text="Date"
             android:textSize="22sp" />
@@ -68,19 +62,28 @@
             android:id="@+id/order_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/order_date"
             android:text="Time"
             android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/order_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_count"
+            android:layout_marginTop="7dp"
+            android:textStyle="bold"
+            android:text="ID: " />
 
         <TextView
             android:id="@+id/id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:visibility="gone"
-            android:text="Identifier"
-            android:textSize="22sp" />
+            android:layout_below="@+id/order_count"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/order_id"
+            android:textStyle="bold"
+            android:text="Identifier" />
 
     </RelativeLayout>
 

@@ -1,63 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".AdminDashboard">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_centerInParent="true">
-
-        <TextView
-            android:id="@+id/appTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add item"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="64dp"/>
+        android:padding="10dp"
+        >
 
         <TextView
             android:id="@+id/itemManagement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inventory management"
+            android:text="Navigation"
             android:textStyle="bold"
             android:textSize="24sp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/appTitle"
             android:layout_marginTop="16dp"/>
 
         <TextView
-            android:id="@+id/announcementManagement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Announcements"
-            android:textSize="24sp"
+            android:text="Available Fertilizers"
             android:textStyle="bold"
-            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:id="@+id/available"
             android:layout_below="@+id/itemManagement"
-            android:layout_marginTop="16dp"/>
+            />
 
-        <TextView
-            android:id="@+id/logout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/available"
+            android:layout_marginTop="2dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logout"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/announcementManagement"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/baseline_add_24"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="Item Add"
+            android:id="@+id/fab"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Item"
+            android:textStyle="bold"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/fab"
+            android:id="@+id/addItem"
+            />
 
     </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

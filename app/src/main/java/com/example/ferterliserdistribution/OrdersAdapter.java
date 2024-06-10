@@ -26,13 +26,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ProductVie
 
     @NonNull
     @Override
-    public OrdersAdapter.ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = inflater.inflate(R.layout.orders_card, parent, false);
         return new ProductViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrdersAdapter.ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Order order = orderArrayList.get(position);
         holder.orderId.setText(order.itemId);
         holder.orderDate.setText(order.orderDate);

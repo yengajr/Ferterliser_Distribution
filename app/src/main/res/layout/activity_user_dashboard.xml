@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome"
+            android:text="@string/welcome"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
             android:layout_marginStart="15dp"
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User Name"
+            android:text="@string/user_name"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginStart="15dp"
@@ -39,7 +39,7 @@
             android:id="@+id/cart1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="cart_button"
+            android:contentDescription="@string/cart_button"
             android:layout_marginEnd="15dp"
             android:layout_alignParentEnd="true"
             android:layout_above="@id/searchView"
@@ -50,7 +50,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="55"
+            android:text="@string/_55"
             android:id="@+id/cart_count"
             android:layout_above="@+id/cart1"
             android:layout_marginTop="10dp"
@@ -59,8 +59,6 @@
             android:textColor="@color/red"
             android:visibility="gone"
             />
-
-
 
         <SearchView
             android:layout_width="match_parent"
@@ -100,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="Todays Anouncement On Discounts"
+                android:text="@string/today"
                 android:layout_alignParentStart="true"
                 android:layout_toStartOf="@id/user_card_image"
                 android:textSize="20sp"
@@ -114,7 +112,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Porpular Brands"
+            android:text="@string/popular_brands"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
@@ -152,8 +150,7 @@
             android:textColor="@color/white"
             android:background="@drawable/button_shape"
             android:textSize="20sp"
-            android:text="0.0" />
-
+            android:text="@string/_0_0" />
 
     </RelativeLayout>
 
