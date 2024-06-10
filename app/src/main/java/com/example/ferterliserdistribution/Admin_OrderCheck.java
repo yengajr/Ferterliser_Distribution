@@ -2,7 +2,9 @@ package com.example.ferterliserdistribution;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -21,11 +23,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Admin_OrderCheck extends AppCompatActivity {
 
     RecyclerView recyclerView;
-
+    TextView noRecord;
     Order_ProcessingAdapter order_processingAdapter;
     ArrayList<Order> orderArrayList;
     FloatingActionButton fab;
@@ -58,10 +61,10 @@ public class Admin_OrderCheck extends AppCompatActivity {
         fab.setOnClickListener(v -> {
             //clear the arraylist
             orderArrayList.clear();
-            //show the dialog
             dialog.show();
             GetOrders();
         });
+
 
         //initialize the database
         db = FirebaseFirestore.getInstance();
@@ -86,8 +89,12 @@ public class Admin_OrderCheck extends AppCompatActivity {
                     }
                     return;
                 }
+                assert value != null;
                 for (Order order : value.toObjects(Order.class)) {
-                    orderArrayList.add(order);
+                    //check if the served is 0
+                    if (Objects.equals(order.getServed(), "0")) {
+                        orderArrayList.add(order);
+                    }
                 }
                 order_processingAdapter.notifyDataSetChanged();
                 if (dialog.isShowing()) {

@@ -32,18 +32,6 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Refresh"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:textColor="@color/light_blue"
-            android:layout_marginEnd="16dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="3dp"
-            android:layout_above="@+id/fab"/>
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,5 +44,6 @@
             app:fabSize="normal"
             android:id="@+id/fab"
             android:contentDescription="Refresh button" />
+
 
 </RelativeLayout>

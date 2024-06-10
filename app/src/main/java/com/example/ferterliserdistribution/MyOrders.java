@@ -43,7 +43,6 @@ public class MyOrders extends AppCompatActivity {
         setContentView(R.layout.activity_my_orders);
 
         recyclerView = findViewById(R.id.orders_recycler);
-        orderArrayList = new ArrayList<>();
         noOrders = findViewById(R.id.my_orders_title);
         fab = findViewById(R.id.refresh_orders);
 
@@ -53,24 +52,11 @@ public class MyOrders extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         userId = Objects.requireNonNull(user).getUid();
 
-        //initialize the adapter
-        ordersAdapter1 = new OrdersAdapter(this, orderArrayList);
-        recyclerView.setAdapter(ordersAdapter1);
-
+        orderArrayList = new ArrayList<>();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //get phone number from user details in the database
-        db.collection("users")
-                .document(userId)
-                .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        email = documentSnapshot.getString("email");
-                        //toast eamail
-                        Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
-                    }
-                });
+        ordersAdapter1 = new OrdersAdapter(this, orderArrayList);
+        recyclerView.setAdapter(ordersAdapter1);
 
 
         //dialog
@@ -86,16 +72,24 @@ public class MyOrders extends AppCompatActivity {
         fab.setOnClickListener(v -> {
             dialog.show();
             orderArrayList.clear();
-            //set adapter again
-            ordersAdapter1 = new OrdersAdapter(this, orderArrayList);
-            recyclerView.setAdapter(ordersAdapter1);
-
             //get orders
             getOrders();
         });
 
-        getOrders();
+        get_UserDetails();
 
+    }
+    private void get_UserDetails() {
+        //get phone number from user details in the database
+        db.collection("users")
+                .document(userId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        email = documentSnapshot.getString("email");
+                        getOrders();
+                    }
+                });
     }
 
     private void getOrders() {
@@ -109,6 +103,7 @@ public class MyOrders extends AppCompatActivity {
                     }
                     return;
                 }
+                assert value != null;
                 for (Order order : value.toObjects(Order.class)) {
                     //check if emailAddress is equal to email
                     if (order.getEmailAddress().equals(email)) {

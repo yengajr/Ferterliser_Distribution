@@ -36,17 +36,44 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ProductVie
         Order order = orderArrayList.get(position);
         holder.orderId.setText(order.itemId);
         holder.orderDate.setText(order.orderDate);
-        //get value of status
-        String status = order.served;
-        if (status.equals("0")){
-            holder.orderStatus.setText("Received");
-        }else if (status.equals("1")){
-            holder.orderStatus.setText("Processed");
-        }
         holder.orderName.setText(order.productName);
         holder.orderAddress.setText(order.orderAddress);
         holder.orderTime.setText(order.orderTime);
         holder.orderCount.setText("Count: "+order.itemCount);
+
+        String status = order.served;
+        switch (status) {
+            case "0":
+                //change text color to blue
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.blue));
+                holder.orderStatus.setText("Placed");
+                break;
+            case "1":
+                //change text color to green
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.magenta));
+                holder.orderStatus.setText("Accepted");
+                break;
+            case "2":
+                //change text color to yellow
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.yellow));
+                holder.orderStatus.setText("Processed");
+                break;
+            case "3":
+                //change text color to orange
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.orange));
+                holder.orderStatus.setText("Dispatched");
+                break;
+            case "4":
+                //change text color to green
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.green));
+                holder.orderStatus.setText("Delivered");
+                break;
+            default:
+                //change text color to red
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.red));
+                holder.orderStatus.setText("Cancelled");
+                break;
+        }
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
