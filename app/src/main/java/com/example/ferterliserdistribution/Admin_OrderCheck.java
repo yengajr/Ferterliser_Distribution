@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -27,6 +28,7 @@ public class Admin_OrderCheck extends AppCompatActivity {
 
     Order_ProcessingAdapter order_processingAdapter;
     ArrayList<Order> orderArrayList;
+    FloatingActionButton fab;
 
     FirebaseFirestore db;
     Dialog dialog;
@@ -42,6 +44,7 @@ public class Admin_OrderCheck extends AppCompatActivity {
         });
 
         recyclerView = findViewById(R.id.recyclerView);
+        fab = findViewById(R.id.fab);
 
         //dialog
         dialog = new MaterialAlertDialogBuilder(this)
@@ -51,6 +54,14 @@ public class Admin_OrderCheck extends AppCompatActivity {
                 .create();
 
         dialog.show();
+
+        fab.setOnClickListener(v -> {
+            //clear the arraylist
+            orderArrayList.clear();
+            //show the dialog
+            dialog.show();
+            GetOrders();
+        });
 
         //initialize the database
         db = FirebaseFirestore.getInstance();

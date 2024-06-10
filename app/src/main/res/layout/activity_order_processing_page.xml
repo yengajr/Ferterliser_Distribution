@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Order_ProcessingPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1B808080"
+        android:padding="10dp"
+        >
+
+        <TextView
+            android:id="@+id/order_stage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ORDER STAGE"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/order_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_below="@+id/order_stage"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            >
+
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FFSSEFFEEEFEF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            android:background="#4CAF50"
+            android:textAlignment="center"
+            android:padding="10dp"
+            />
+
+        <TextView
+            android:id="@+id/order_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name: "
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/id"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFSSEFFEEEFEF"
+            android:layout_toEndOf="@+id/order_name"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/id"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/order_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Count: "
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/order_name"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFSSEFFEEEFEF"
+            android:layout_alignParentEnd="true"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/name"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/order_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status: "
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/order_count"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFSSEFFEEEFEF"
+            android:layout_alignParentEnd="true"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/count"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/order_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address: "
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/order_status"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFSSEFFEEEFEF"
+            android:layout_alignParentEnd="true"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/status"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+            <TextView
+                android:id="@+id/order_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone: "
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/order_address"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0712345678"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/address"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/light_blue"
+                />
+
+        <TextView
+            android:id="@+id/order_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: "
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/order_phone"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFSSEFFEEEFEF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/phone"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/order_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time: "
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/order_date"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFSSEFFEEEFEF"
+            android:layout_alignParentEnd="true"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/date"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/process"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ACCEPT"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/order_details"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_shape"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            />
+
+    </RelativeLayout>
+
+</ScrollView>

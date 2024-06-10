@@ -150,7 +150,6 @@ public class UserDashboard extends AppCompatActivity {
             recyclerView.setAdapter(itemsAdapter);
             mySwipeRefreshLayout.setRefreshing(false);
 
-
             //check if cart is empty
             if (Product_Cart.getInstance().getSelectedProducts().isEmpty()) {
                 //make cart count invisible
