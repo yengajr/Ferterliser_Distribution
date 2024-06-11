@@ -90,7 +90,7 @@ public class Distributor_OrderCheck extends AppCompatActivity {
                 assert value != null;
                 for (Order order : value.toObjects(Order.class)) {
                     //add orders whose served value is 1
-                    if (Objects.equals(order.getServed(), "1")) {
+                    if (Objects.equals(order.getServed(), "2")) {
                         orderArrayList.add(order);
                     }
                 }

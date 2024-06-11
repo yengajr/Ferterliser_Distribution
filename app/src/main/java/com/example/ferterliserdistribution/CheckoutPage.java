@@ -184,6 +184,7 @@ public class CheckoutPage extends AppCompatActivity {
             orderData.put("served", "0");
             orderData.put("orderTime", currentTime);
             orderData.put("orderAddress", orderAddress);
+            orderData.put("distributor", "none");
 
             db.collection("Orders")
                     .document("Customer")

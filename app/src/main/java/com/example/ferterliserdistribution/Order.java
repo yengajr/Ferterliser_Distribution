@@ -1,12 +1,12 @@
 package com.example.ferterliserdistribution;
 
 public class Order {
-String emailAddress,itemCount,itemId,orderDate,paymentNumber,productCategory,productName,orderTime,orderAddress,served;
+String emailAddress,itemCount,itemId,orderDate,paymentNumber,productCategory,productName,orderTime,orderAddress,served,distributor;
 
     public Order() {
     }
 
-    public Order(String emailAddress, String itemCount, String itemId, String orderDate, String paymentNumber, String productCategory, String productName, String served, String orderTime, String orderAddress) {
+    public Order(String emailAddress, String itemCount, String itemId, String orderDate, String paymentNumber, String productCategory, String productName, String served, String orderTime, String orderAddress, String distributor) {
         this.emailAddress = emailAddress;
         this.itemCount = itemCount;
         this.itemId = itemId;
@@ -17,6 +17,7 @@ String emailAddress,itemCount,itemId,orderDate,paymentNumber,productCategory,pro
         this.served = served;
         this.orderTime = orderTime;
         this.orderAddress = orderAddress;
+        this.distributor = distributor;
     }
 
     public String getEmailAddress() {
@@ -97,5 +98,13 @@ String emailAddress,itemCount,itemId,orderDate,paymentNumber,productCategory,pro
 
     public void setOrderAddress(String orderAddress) {
         this.orderAddress = orderAddress;
+    }
+
+    public String getDistributor() {
+        return distributor;
+    }
+
+    public void setDistributor(String distributor) {
+        this.distributor = distributor;
     }
 }

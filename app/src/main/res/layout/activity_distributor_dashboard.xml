@@ -24,6 +24,16 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="64dp"/>
 
+        <TextView
+            android:id="@+id/welcomeMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log out"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/appTitle"
+            android:layout_marginTop="16dp"/>
 
     </RelativeLayout>
 

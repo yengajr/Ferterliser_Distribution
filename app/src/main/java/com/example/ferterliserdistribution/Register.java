@@ -33,6 +33,7 @@ public class Register extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
+    String user2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,16 +96,19 @@ public class Register extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 FirebaseUser user1 = mAuth.getCurrentUser();
                                 assert user1 != null;
-                                String user2 = user1.getUid();
+                                 user2 = user1.getUid();
 
                                 // Add user details to firestore
                                 db.collection("users").document(user2) // Using "users" collection
-                                        .set(new User(nameValue, emailValue, passwordValue, roleValue)) // Include roleValue
+                                        .set(new User(nameValue, emailValue, passwordValue, roleValue,user2)) // Include roleValue
                                         .addOnSuccessListener(aVoid -> {
                                             dialog.dismiss();
                                             // Sign in success, update UI with the signed-in user's information
                                             Toast.makeText(Register.this, "Sign up successful.",
                                                     Toast.LENGTH_SHORT).show();
+
+                                            // Redirect to login page
+                                            startActivity(new Intent(Register.this, Login.class));
                                         })
                                         .addOnFailureListener(e -> {
                                             dialog.dismiss();

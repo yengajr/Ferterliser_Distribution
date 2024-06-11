@@ -91,8 +91,8 @@ public class Admin_OrderCheck extends AppCompatActivity {
                 }
                 assert value != null;
                 for (Order order : value.toObjects(Order.class)) {
-                    //check if the served is 0
-                    if (Objects.equals(order.getServed(), "0")) {
+                    //check if the served is 0 or 1
+                    if (Objects.equals(order.getServed(), "0") || Objects.equals(order.getServed(), "1")) {
                         orderArrayList.add(order);
                     }
                 }
