@@ -5,22 +5,24 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#795548"
     tools:context=".AdminNavigation">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:background="@drawable/navigation_design"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/adminTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Admin Navigation"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:text="ADMIN NAVIGATION"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="30dp"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             />
 
@@ -29,10 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginBottom="3dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="30dp"
                 android:background="@drawable/navigation_button_design"
                 android:layout_below="@id/adminTitle"
                 >
@@ -57,10 +58,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="3dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="30dp"
                 android:layout_below="@+id/linear_Layout_home"
                 android:background="@drawable/navigation_button_design"
                 >
@@ -86,10 +86,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="3dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="30dp"
                 android:layout_below="@id/linear_Layout_order"
                 android:background="@drawable/navigation_button_design"
                 >
@@ -116,10 +115,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="3dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="30dp"
             android:background="@drawable/navigation_button_design"
             android:layout_below="@id/adminTitle"
             android:layout_alignParentEnd="true"
@@ -133,7 +131,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="INVERNTORY\nMANAGEMENT"
+                android:text="INVENTORY  \nCONTROL"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
@@ -142,13 +140,12 @@
 
         <LinearLayout
             android:id="@+id/linear_Layout_announcement"
-            android:layout_width="158dp"
-            android:layout_height="167dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/linear_Layout_home"
             android:layout_alignParentEnd="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="3dp"
             android:background="@drawable/navigation_button_design"
             android:orientation="vertical">
@@ -162,21 +159,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MAKE\nANNOUNCEMENT"
+                android:text="BROADCAST\nUPDATES"
                 android:textAlignment="center"
+                android:layout_gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linear_Layout_logout"
-            android:layout_width="154dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/linear_Layout_order"
             android:layout_alignParentEnd="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="3dp"
             android:background="@drawable/navigation_button_design"
             android:orientation="vertical">
@@ -193,7 +190,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="LOG OUT"
+                android:paddingStart="15dp"
+                android:paddingEnd="11dp"
+                android:paddingTop="5dp"
+                android:text="SIGN OUT"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />

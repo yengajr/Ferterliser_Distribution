@@ -35,50 +35,120 @@
             android:layout_below="@+id/topTittle"
              />
 
-        <ImageButton
-            android:id="@+id/cart1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/cart_button"
-            android:layout_marginEnd="15dp"
-            android:layout_alignParentEnd="true"
-            android:layout_above="@id/searchView"
-            android:layout_marginBottom="10dp"
-            android:background="@color/transparent"
-            android:src="@drawable/shopping_cart" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/_55"
+            android:text=""
             android:id="@+id/cart_count"
-            android:layout_above="@+id/cart1"
-            android:layout_marginTop="10dp"
+            android:layout_alignTop="@+id/linearLayout1"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="22dp"
+            android:layout_marginEnd="30dp"
             android:textColor="@color/red"
             android:visibility="gone"
             />
 
-        <SearchView
+        <LinearLayout
+            android:id="@+id/linear_layout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="13dp"
+            android:layout_alignParentEnd="true"
+            >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logout_icon"
+                android:id="@+id/logout"
+                android:contentDescription="logout button"
+                android:background="@drawable/icon_design"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Logout"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/searchView"
+            android:orientation="horizontal"
             android:layout_below="@+id/user_name"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="10dp"
+            android:id="@+id/linearLayout1"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="5dp"
+                >
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dashboard_icon"
+                    android:id="@+id/orders"
+                    android:contentDescription="profile_button"
+                    android:background="@drawable/icon_design"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Orders"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+
+        <SearchView
+            android:layout_width="0dp"
+            android:layout_height="43dp"
+            android:id="@+id/searchView"
             android:queryHint="Search for products"
             android:background="@drawable/spinner_design"
             android:iconifiedByDefault="false"
-            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
             />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <ImageButton
+                    android:id="@+id/cart1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icon_design"
+                    android:contentDescription="@string/cart_button"
+                    android:layout_gravity="end"
+                    android:src="@drawable/shopping_cart" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Cart"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/searchView"
+            android:layout_below="@id/linearLayout1"
             android:layout_marginStart="15dp"
             android:background="@drawable/background_design"
             android:layout_marginEnd="15dp"

@@ -38,19 +38,34 @@ import java.util.Objects;
 public class UserDashboard extends AppCompatActivity {
 
     TextView username, announcementText;
-    ImageButton btn_navigation, btn_cart, btn_logout;
+
+    ImageButton btn_navigation, btn_logout;
+
     TextView cart_count,current_total1;
+
     RecyclerView recyclerView;
+
     ShapeableImageView announcementImage;
+
     SearchView searchView;
+    ImageButton logout,cart,orders;
+
     private SwipeRefreshLayout mySwipeRefreshLayout;
+
     ItemsAdapter itemsAdapter;
+
     ArrayList<Product> productArrayList;
+
     ArrayList<AnnouncementClass> announcementArrayList;
+
     FirebaseFirestore db;
+
     private FirebaseAuth mAuth;
+
     Dialog dialog;
+
     String userId, imageUrl, announcementText1;
+
 
     private boolean doubleBackToExitPressedOnce = false;
     private static final int BACK_PRESS_DELAY = 2000; // 2 second
@@ -89,8 +104,10 @@ public class UserDashboard extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         mySwipeRefreshLayout = findViewById(R.id.main);
         cart_count = findViewById(R.id.cart_count);
-        btn_cart = findViewById(R.id.cart1);
         current_total1 = findViewById(R.id.current_total);
+        logout = findViewById(R.id.logout);
+        cart = findViewById(R.id.cart1);
+        orders = findViewById(R.id.orders);
 
         announcementArrayList = new ArrayList<>();
 
@@ -112,7 +129,7 @@ public class UserDashboard extends AppCompatActivity {
         // Set the texts
         announcementText.setText("announcementText1");
 
-        announcementText.setOnClickListener(v -> {
+        logout.setOnClickListener(v -> {
             //log out
             mAuth.signOut();
             startActivity(new Intent(UserDashboard.this, Login.class));
@@ -120,19 +137,14 @@ public class UserDashboard extends AppCompatActivity {
         });
 
 
-        announcementImage.setOnClickListener(v -> {
-            //log out
-           /* mAuth.signOut();
-                startActivity(new Intent(UserDashboard.this, Login.class));
-                finish();*/
-
-            // Move to the myorders page
+        orders.setOnClickListener(v -> {
+            // Move to the my orders page
             startActivity(new Intent(UserDashboard.this, MyOrders.class));
 
         });
 
         // Set the cart button listener
-        btn_cart.setOnClickListener(v -> {
+        cart.setOnClickListener(v -> {
             // Move to the cart page
             startActivity(new Intent(UserDashboard.this, Items_Cart.class));
         });
