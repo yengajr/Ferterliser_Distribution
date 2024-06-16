@@ -41,6 +41,7 @@ public class AdminNavigation extends AppCompatActivity {
 
         sales.setOnClickListener(v -> {
            // startActivity(new Intent(AdminNavigation.this, AdminSales.class));
+            startActivity(new Intent(AdminNavigation.this, Location_Management.class));
         });
 
         logout.setOnClickListener(v -> {

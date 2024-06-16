@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class MyOrders extends AppCompatActivity {
@@ -110,6 +111,8 @@ public class MyOrders extends AppCompatActivity {
                         orderArrayList.add(order);
                     }
                 }
+               // Collections.reverse(orderArrayList);
+                orderArrayList.sort((o1, o2) -> o2.getOrderDate().compareTo(o1.getOrderDate()));
                 ordersAdapter1.notifyDataSetChanged();
                 if (dialog.isShowing()) {
                     dialog.dismiss();

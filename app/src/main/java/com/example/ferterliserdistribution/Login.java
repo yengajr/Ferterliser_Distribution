@@ -28,12 +28,22 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
+    Dialog dialog;
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        //dialog to show progress
+        dialog = new MaterialAlertDialogBuilder(this)
+                .setView(new ProgressBar(this))
+                .setTitle("Signing in")
+                .setMessage("Please wait")
+                .create();
+        dialog.show();
+
         if(currentUser != null){
 
             //get current user id
@@ -50,11 +60,13 @@ public class Login extends AppCompatActivity {
                                 //redirect to admin dashboard
                                 startActivity(new Intent(Login.this, AdminDashboard.class));
                                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
                                 break;
                             case "Distributor":
                                 //redirect to distributor dashboard
                                 startActivity(new Intent(Login.this, DistributorDashboard.class));
                                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
                                 break;
                             case "User":
                                 //redirect to user dashboard
@@ -66,10 +78,12 @@ public class Login extends AppCompatActivity {
                                 //redirect to delivery dashboard
                                 startActivity(new Intent(Login.this, DeliveryDashboard.class));
                                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
                                 break;
 
                             default:
                                 Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
                         }
                     }
                 }
@@ -109,10 +123,11 @@ public class Login extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         //dialog to show progress
-        Dialog dialog = new MaterialAlertDialogBuilder(this)
+        dialog = new MaterialAlertDialogBuilder(this)
                 .setView(new ProgressBar(this))
                 .setTitle("Signing in")
                 .setMessage("Please wait")
+                .setCancelable(false)
                 .create();
 
 

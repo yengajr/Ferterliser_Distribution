@@ -1,10 +1,12 @@
 package com.example.ferterliserdistribution;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,11 +16,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class CustomerDetails extends AppCompatActivity {
@@ -35,6 +40,14 @@ public class CustomerDetails extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String  emailAddress,phoneNumber,location,deliveryCharge;
 
+    Dialog dialog;
+
+    private ArrayList<String> orderList;
+    private ArrayList<LocationClass> itemsArrayList;
+    ArrayAdapter<String> adapter;
+
+    String locationName,locationPrice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +61,13 @@ public class CustomerDetails extends AppCompatActivity {
          autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
         deliveryFees = findViewById(R.id.delivery_cost);
 
+        //dialog
+        dialog = new MaterialAlertDialogBuilder(this)
+                .setView(new ProgressBar(this))
+                .setTitle("Fetching Data...")
+                .setMessage("Please wait")
+                .create();
+        dialog.show();
 
         // Initialize Firestore
         db = FirebaseFirestore.getInstance();
@@ -55,56 +75,38 @@ public class CustomerDetails extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         userId = Objects.requireNonNull(user).getUid();
 
-        // Get the array of locations from strings.xml
-        String[] locations = getResources().getStringArray(R.array.locations_array);
+        orderList = new ArrayList<>();
+        itemsArrayList = new ArrayList<>();
 
-        // Create the adapter and set it to the AutoCompleteTextView
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, locations);
+ // Set the adapter for the AutoCompleteTextView
+         adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, orderList);
         autoCompleteTextView.setAdapter(adapter);
 
-        // Set up the item click listener
+        // Set the click listener for the AutoCompleteTextView
         autoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedLocation = (String) parent.getItemAtPosition(position);
-            String deliveryFee;
-            switch (selectedLocation) {
-                case "Kisumu":
-                    deliveryFee = "200.0";
-                    break;
-                case "Nairobi":
-                    deliveryFee = "300.0";
-                    break;
-                case "Mombasa":
-                    deliveryFee = "400.0";
-                    break;
-                default:
-                    deliveryFee = "0.0";
-                    break;
+            // Get the selected item
+            String selectedItem = (String) parent.getItemAtPosition(position);
+            // Set the selected item to the AutoCompleteTextView
+            autoCompleteTextView.setText(selectedItem);
+            //store the name of the location
+            location = selectedItem;
+
+            for (LocationClass locationClass : itemsArrayList) {
+                if (locationClass.getLocation().equals(location)) {
+                    deliveryFees.setText(locationClass.getPrice());
+                }
             }
-            //set text to the delivery fee
-            deliveryFees.setText(deliveryFee);
+
         });
 
-        // get name and email of user from the data base
-        db.collection("users")
-                .document(userId)
-                .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        String email = documentSnapshot.getString("email");
-                        String name = documentSnapshot.getString("name");
-                        customerEmail.setText(email);
-                        customerName.setText(name);
-                    }
-                });
 
         //Proceed button click listener
         proceed.setOnClickListener(v -> {
             emailAddress = customerEmail.getText().toString();
             phoneNumber = Objects.requireNonNull(customerPhone.getText()).toString();
-            location = autoCompleteTextView.getText().toString();
             deliveryCharge = deliveryFees.getText().toString();
-            // Do something with the data
+
 
             //validate phone number
             if (phoneNumber.length() != 10) {
@@ -113,6 +115,7 @@ public class CustomerDetails extends AppCompatActivity {
             } else if (location.isEmpty()) {
                 autoCompleteTextView.setError("Location is required");
                 autoCompleteTextView.requestFocus();
+                return;
             }
             else {
                 //pass the data to the next activity
@@ -124,5 +127,49 @@ public class CustomerDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // get name and email of user from the data base
+        getUser_Details();
+
+        //get locations from the database
+        getLocations();
+    }
+
+    private void getUser_Details() {
+        db.collection("users")
+                .document(userId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String email = documentSnapshot.getString("email");
+                        String name = documentSnapshot.getString("name");
+                        customerEmail.setText(email);
+                        customerName.setText(name);
+                    }
+                });
+    }
+
+    private void getLocations() {
+
+        db.collection("Destinations")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (int i = 0; i < Objects.requireNonNull(task.getResult()).size(); i++) {
+                            String location = task.getResult().getDocuments().get(i).getString("location");
+                            String price = task.getResult().getDocuments().get(i).getString("price");
+                            LocationClass locationClass = new LocationClass(location, price);
+                            itemsArrayList.add(locationClass);
+                            // Add the location to the list
+                            orderList.add(location);
+
+                        }
+                        Collections.sort(orderList);
+                        dialog.dismiss();
+                    } else {
+                        Toast.makeText(CustomerDetails.this, "Error getting data", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
     }
 }

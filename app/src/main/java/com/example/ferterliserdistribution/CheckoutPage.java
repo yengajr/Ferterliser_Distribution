@@ -108,6 +108,8 @@ public class CheckoutPage extends AppCompatActivity {
                 customerOrders();
                 updateQuantities();
                 soldProducts();
+
+                dialog.show();
         });
 
 
