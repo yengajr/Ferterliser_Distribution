@@ -81,12 +81,13 @@ public class Delivery_orderCheck extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         GetOrders();
+        CurrentUserDetails();
     }
 
     private void CurrentUserDetails() {
         db.collection("users").document(userId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                location = task.getResult().getString("name");
+                location = task.getResult().getString("location");
             }
         });
     }
