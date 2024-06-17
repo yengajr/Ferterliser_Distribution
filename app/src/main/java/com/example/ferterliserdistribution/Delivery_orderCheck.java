@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -33,6 +34,9 @@ public class Delivery_orderCheck extends AppCompatActivity {
 
     FirebaseFirestore db;
     Dialog dialog;
+    String location, userId;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,9 @@ public class Delivery_orderCheck extends AppCompatActivity {
 
         dialog.show();
 
+        mAuth = FirebaseAuth.getInstance();
+        userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
         fab.setOnClickListener(v -> {
             //clear the arraylist
             orderArrayList.clear();
@@ -76,6 +83,14 @@ public class Delivery_orderCheck extends AppCompatActivity {
         GetOrders();
     }
 
+    private void CurrentUserDetails() {
+        db.collection("users").document(userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                location = task.getResult().getString("name");
+            }
+        });
+    }
+
     private void GetOrders() {
         db.collection("Orders").document("Customer").collection("order").addSnapshotListener((new EventListener<QuerySnapshot>() {
             @Override
@@ -90,7 +105,7 @@ public class Delivery_orderCheck extends AppCompatActivity {
                 assert value != null;
                 for (Order order : value.toObjects(Order.class)) {
                     //add orders whose served value is 1
-                    if (Objects.equals(order.getServed(), "3")) {
+                    if (Objects.equals(order.getServed(), "3")||Objects.equals(order.getOrderAddress(), location)){
                         orderArrayList.add(order);
                     }
                 }
