@@ -112,10 +112,10 @@ public class CustomerDetails extends AppCompatActivity {
             if (phoneNumber.length() != 10) {
                 customerPhone.setError("Invalid phone number");
                 customerPhone.requestFocus();
-            } else if (location.isEmpty()) {
-                autoCompleteTextView.setError("Location is required");
+            } else if (autoCompleteTextView.getText().toString().isEmpty()) {
+                autoCompleteTextView.setError("Select a location");
                 autoCompleteTextView.requestFocus();
-                return;
+
             }
             else {
                 //pass the data to the next activity

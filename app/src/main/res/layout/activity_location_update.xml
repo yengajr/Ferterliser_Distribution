@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Location_Update">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp">
+
+        <ImageButton
+            android:background="@color/transparent"
+            android:layout_width="51dp"
+            android:layout_height="48dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:id="@+id/back"
+            android:layout_marginBottom="19dp"
+            android:layout_marginStart="15dp"
+            android:contentDescription="back_button"
+            android:layout_marginEnd="13dp"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="location_update"
+            android:textSize="25sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name :"
+            android:id="@+id/name_txt"
+            android:layout_below="@+id/textView"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distributor1"
+            android:id="@+id/name_field"
+            android:layout_toEndOf="@+id/name_txt"
+            android:layout_below="@+id/textView"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Role :"
+            android:id="@+id/role_txt"
+            android:layout_below="@+id/name_field"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distributor"
+            android:id="@+id/role_field"
+            android:layout_toEndOf="@+id/role_txt"
+            android:layout_below="@+id/name_field"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location :"
+            android:id="@+id/location_txt"
+            android:layout_below="@+id/role_field"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nairobi"
+            android:id="@+id/location_field"
+            android:layout_toEndOf="@+id/location_txt"
+            android:layout_below="@+id/role_field"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email :"
+            android:id="@+id/email_txt"
+            android:layout_below="@+id/location_field"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distributor"
+            android:id="@+id/email_field"
+            android:layout_toEndOf="@+id/email_txt"
+            android:layout_below="@+id/location_field"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Identifier :"
+            android:id="@+id/identifier_txt"
+            android:layout_below="@+id/email_field"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sdhskkajkscksakcksa"
+            android:id="@+id/identifier_field"
+            android:layout_toEndOf="@+id/identifier_txt"
+            android:layout_below="@+id/email_field"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update User"
+            android:id="@+id/update"
+            android:layout_below="@+id/identifier_field"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"
+            android:background="@drawable/button_shape"
+            />
+
+        <!-- res/values/strings.xml -->
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_below="@+id/update"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:completionThreshold="1"
+            android:background="@drawable/textview_design"
+            android:hint="Select Location" />
+
+
+    </RelativeLayout>
+
+</ScrollView>

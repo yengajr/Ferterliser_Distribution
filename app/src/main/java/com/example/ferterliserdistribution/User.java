@@ -6,13 +6,18 @@ public class User {
     private String password;
     private String roleValue;
     private String userId;
+    private String location;
 
-    public User(String name, String email, String password, String roleValue, String userId) {
+    public User() {
+    }
+
+    public User(String name, String email, String password, String roleValue, String userId, String location) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.roleValue = roleValue;
         this.userId = userId;
+        this.location = location;
     }
 
     public String getName() {
@@ -54,4 +59,13 @@ public class User {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
 }

@@ -34,6 +34,7 @@ public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
     String user2;
+    String location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,8 @@ public class Register extends AppCompatActivity {
             String emailValue = Objects.requireNonNull(email.getText()).toString().trim();
             String passwordValue = Objects.requireNonNull(password.getText()).toString().trim();
             String confirmPasswordValue = Objects.requireNonNull(confirm_password.getText()).toString().trim();
-            String roleValue = spinner.getSelectedItem().toString().trim(); // Get selected role
+            String roleValue = spinner.getSelectedItem().toString().trim();
+            location = "Null";
 
             //validate the values
             if (nameValue.isEmpty() || emailValue.isEmpty() || passwordValue.isEmpty() || confirmPasswordValue.isEmpty()) {
@@ -100,7 +102,7 @@ public class Register extends AppCompatActivity {
 
                                 // Add user details to firestore
                                 db.collection("users").document(user2) // Using "users" collection
-                                        .set(new User(nameValue, emailValue, passwordValue, roleValue,user2)) // Include roleValue
+                                        .set(new User(nameValue, emailValue, passwordValue, roleValue,user2,location)) // Include roleValue
                                         .addOnSuccessListener(aVoid -> {
                                             dialog.dismiss();
                                             // Sign in success, update UI with the signed-in user's information
