@@ -16,6 +16,15 @@
         android:paddingEnd="20dp"
         android:layout_gravity="center_vertical">
 
+        <ImageView
+            android:layout_width="230dp"
+            android:layout_height="200dp"
+            android:src="@drawable/logo1"
+            android:layout_gravity="center"
+            android:contentDescription="logo"
+            android:layout_marginBottom="5dp"
+            />
+
     <TextView
         android:id="@+id/textview1"
         android:layout_width="match_parent"

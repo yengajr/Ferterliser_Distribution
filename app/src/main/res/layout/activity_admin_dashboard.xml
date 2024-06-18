@@ -16,23 +16,59 @@
         >
 
         <TextView
-            android:id="@+id/itemManagement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Navigation"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"/>
+            android:text="@string/welcome"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/topTittle"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_name"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:id="@+id/user_name"
+            android:layout_below="@+id/topTittle"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/linear_Layout">
+
+            <ImageButton
+                android:id="@+id/menu_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="menu button"
+                android:src="@drawable/menu_icon"
+                />
+
+            <TextView
+                android:id="@+id/itemManagement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Menu"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Available Fertilizers"
             android:textStyle="bold"
-            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"
             android:id="@+id/available"
-            android:layout_below="@+id/itemManagement"
+            android:layout_below="@+id/user_name"
             />
 
         <androidx.recyclerview.widget.RecyclerView

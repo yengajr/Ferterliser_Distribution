@@ -2,7 +2,9 @@ package com.example.ferterliserdistribution;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,22 @@ public class DistributorDashboard extends AppCompatActivity {
 
     TextView welcomeText,tittleText;
     private FirebaseAuth mAuth;
+
+    private boolean doubleBackToExitPressedOnce = false;
+    private static final int BACK_PRESS_DELAY = 2000; // 2 second
+
+    // Override the onBackPressed method
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            finishAffinity();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, BACK_PRESS_DELAY);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

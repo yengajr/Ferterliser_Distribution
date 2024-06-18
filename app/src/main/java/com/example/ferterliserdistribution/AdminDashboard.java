@@ -3,8 +3,12 @@ package com.example.ferterliserdistribution;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -24,11 +28,14 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AdminDashboard extends AppCompatActivity {
 
-    TextView textView1;
+    TextView textView1, username;
     FloatingActionButton floatingActionButton;
+    LinearLayout linearLayout;
+    ImageButton imageButton;
     RecyclerView recyclerView;
     Admin_ItemsAdapter admin_itemsAdapter;
 
@@ -36,6 +43,23 @@ public class AdminDashboard extends AppCompatActivity {
     FirebaseFirestore db;
     private FirebaseAuth mAuth;
     Dialog dialog;
+    String userId;
+
+    private boolean doubleBackToExitPressedOnce = false;
+    private static final int BACK_PRESS_DELAY = 2000; // 2 second
+
+    // Override the onBackPressed method
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            finishAffinity();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, BACK_PRESS_DELAY);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +70,14 @@ public class AdminDashboard extends AppCompatActivity {
         textView1 = findViewById(R.id.itemManagement);
         recyclerView = findViewById(R.id.recyclerView);
         floatingActionButton = findViewById(R.id.fab);
+        linearLayout = findViewById(R.id.linear_Layout);
+        username = findViewById(R.id.user_name);
+        imageButton = findViewById(R.id.menu_button);
 
         //firebase initialisation
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
         //dialog initialisation
         //dialog
@@ -67,7 +95,7 @@ public class AdminDashboard extends AppCompatActivity {
             startActivity(new Intent(AdminDashboard.this, InventoryAddition.class));
         });
 
-        textView1.setOnClickListener(v -> {
+        imageButton.setOnClickListener(v -> {
             // move to item_management activity
             startActivity(new Intent(AdminDashboard.this, AdminNavigation.class));
         });
@@ -84,6 +112,16 @@ public class AdminDashboard extends AppCompatActivity {
 
         //method to get items from the database
         getItems();
+        CurrentUserDetails();
+    }
+
+    //method to get user details
+    private void CurrentUserDetails() {
+        db.collection("users").document(userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                username.setText(task.getResult().getString("name"));
+            }
+        });
     }
 
     private void getItems() {

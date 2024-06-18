@@ -3,6 +3,7 @@ package com.example.ferterliserdistribution;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +31,22 @@ public class Login extends AppCompatActivity {
     FirebaseFirestore db;
     Dialog dialog;
 
+    private boolean doubleBackToExitPressedOnce = false;
+    private static final int BACK_PRESS_DELAY = 2000; // 2 second
+
+    // Override the onBackPressed method
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            finishAffinity();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, BACK_PRESS_DELAY);
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -42,9 +59,9 @@ public class Login extends AppCompatActivity {
                 .setTitle("Signing in")
                 .setMessage("Please wait")
                 .create();
-        dialog.show();
 
         if(currentUser != null){
+            dialog.show();
 
             //get current user id
             String uid = currentUser.getUid();
@@ -116,9 +133,7 @@ public class Login extends AppCompatActivity {
             // move to register activity
             Intent intent = new Intent(this, Register.class);
             startActivity(intent);
-
         });
-
 
         db = FirebaseFirestore.getInstance();
 
@@ -129,7 +144,6 @@ public class Login extends AppCompatActivity {
                 .setMessage("Please wait")
                 .setCancelable(false)
                 .create();
-
 
         login.setOnClickListener(v -> {
             //get the values from the TextInputEditText
