@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/topImage"
-        android:layout_width="306dp"
-        android:layout_height="192dp"
+        android:layout_width="293dp"
+        android:layout_height="195dp"
         android:contentDescription="topImage"
         android:src="@drawable/home2" />
 

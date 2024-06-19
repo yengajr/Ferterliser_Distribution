@@ -167,13 +167,43 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_Layout_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="3dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/linear_Layout_order"
+            android:background="@drawable/navigation_button_design"
+            >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/location_icon"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location\nManagement"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/linear_Layout_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linear_Layout_order"
-            android:layout_alignParentEnd="true"
+            android:layout_below="@id/linear_Layout_sales"
             android:layout_marginEnd="30dp"
             android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
             android:layout_marginBottom="3dp"
             android:background="@drawable/navigation_button_design"
             android:orientation="vertical">

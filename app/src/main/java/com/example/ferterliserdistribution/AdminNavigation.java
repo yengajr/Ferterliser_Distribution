@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminNavigation extends AppCompatActivity {
 
-    LinearLayout home, orders, sales,logout,announcement,inventory;
+    LinearLayout home, orders, sales,logout,announcement,inventory,location;
     private FirebaseAuth mAuth;
 
     @Override
@@ -28,6 +28,7 @@ public class AdminNavigation extends AppCompatActivity {
         logout = findViewById(R.id.linear_Layout_logout);
         announcement = findViewById(R.id.linear_Layout_announcement);
         inventory = findViewById(R.id.linear_Layout_inventory);
+        location = findViewById(R.id.linear_Layout_location);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -39,7 +40,7 @@ public class AdminNavigation extends AppCompatActivity {
             startActivity(new Intent(AdminNavigation.this, Admin_OrderCheck.class));
         });
 
-        sales.setOnClickListener(v -> {
+        location.setOnClickListener(v -> {
            // startActivity(new Intent(AdminNavigation.this, AdminSales.class));
             startActivity(new Intent(AdminNavigation.this, Location_Assignment.class));
         });

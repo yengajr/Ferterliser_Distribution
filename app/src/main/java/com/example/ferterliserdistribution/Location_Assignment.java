@@ -1,9 +1,11 @@
 package com.example.ferterliserdistribution;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +33,8 @@ public class Location_Assignment extends AppCompatActivity {
     FirebaseFirestore db;
     Dialog dialog;
 
+    TextView addLocation;
+
 
 
     @Override
@@ -46,6 +50,7 @@ public class Location_Assignment extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         fab = findViewById(R.id.fab);
+        addLocation = findViewById(R.id.textView2);
         db = FirebaseFirestore.getInstance();
 
         dialog = new MaterialAlertDialogBuilder(this)
@@ -55,6 +60,18 @@ public class Location_Assignment extends AppCompatActivity {
                 .create();
 
         dialog.show();
+
+        fab.setOnClickListener(v -> {
+            //clear the arraylist
+            userArrayList.clear();
+            dialog.show();
+            getData();
+        });
+
+        addLocation.setOnClickListener(v -> {
+            // startActivity(new Intent(AdminNavigation.this, AdminSales.class));
+            startActivity(new Intent(Location_Assignment.this, Location_Management.class));
+        });
 
         userArrayList = new ArrayList<>();
         userAdapter = new UserAdapter(this, userArrayList);
@@ -76,7 +93,9 @@ public class Location_Assignment extends AppCompatActivity {
                         dialog.dismiss();
                         for (int i = 0; i < task.getResult().size(); i++) {
                             User user = task.getResult().toObjects(User.class).get(i);
-                            userArrayList.add(user);
+                            if(Objects.equals(user.getRoleValue(),"Delivery")) {
+                                userArrayList.add(user);
+                            }
                         }
                         userAdapter.notifyDataSetChanged();
                     }
