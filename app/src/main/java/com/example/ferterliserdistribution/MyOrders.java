@@ -115,6 +115,9 @@ public class MyOrders extends AppCompatActivity {
                     return;
                 }
                 assert value != null;
+
+                orderArrayList.clear();
+
                 for (Order order : value.toObjects(Order.class)) {
                     //check if emailAddress is equal to email
                     if (order.getEmailAddress().equals(email)) {

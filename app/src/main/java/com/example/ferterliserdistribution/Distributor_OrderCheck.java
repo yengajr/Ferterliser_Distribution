@@ -88,6 +88,8 @@ public class Distributor_OrderCheck extends AppCompatActivity {
                     return;
                 }
                 assert value != null;
+                orderArrayList.clear();
+
                 for (Order order : value.toObjects(Order.class)) {
                     //add orders whose served value is 1
                     if (Objects.equals(order.getServed(), "2")) {

@@ -284,24 +284,26 @@ public class UserDashboard extends AppCompatActivity {
 
     //method to fetch data
     private void EventChangeListener() {
-        db.collection("Products").document("Fertilizer").collection("Available").addSnapshotListener((new EventListener<QuerySnapshot>() {
+        db.collection("Products").document("Fertilizer").collection("Available").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
                 if (error != null) {
                     if (dialog.isShowing()) {
                         dialog.dismiss();
                     }
                     return;
                 }
+
                 assert value != null;
+                // Clear the array list before adding new data
+                productArrayList.clear();
                 productArrayList.addAll(value.toObjects(Product.class));
                 itemsAdapter.notifyDataSetChanged();
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
             }
-        }));
-
+        });
     }
+
 }

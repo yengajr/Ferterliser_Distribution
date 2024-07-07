@@ -79,19 +79,21 @@ public class Admin_OrderCheck extends AppCompatActivity {
     }
 
     private void GetOrders() {
-        db.collection("Orders").document("Customer").collection("order").addSnapshotListener((new EventListener<QuerySnapshot>() {
+        db.collection("Orders").document("Customer").collection("order").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
                 if (error != null) {
                     if (dialog.isShowing()) {
                         dialog.dismiss();
                     }
                     return;
                 }
+
                 assert value != null;
+                // Clear the array list before adding new data
+                orderArrayList.clear();
                 for (Order order : value.toObjects(Order.class)) {
-                    //check if the served is 0 or 1
+                    // Check if the served is 0 or 1
                     if (Objects.equals(order.getServed(), "0") || Objects.equals(order.getServed(), "1")) {
                         orderArrayList.add(order);
                     }
@@ -101,6 +103,7 @@ public class Admin_OrderCheck extends AppCompatActivity {
                     dialog.dismiss();
                 }
             }
-        }));
+        });
     }
+
 }
