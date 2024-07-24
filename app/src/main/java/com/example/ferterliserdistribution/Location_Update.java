@@ -1,6 +1,7 @@
 package com.example.ferterliserdistribution;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -16,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,16 +28,18 @@ import java.util.Objects;
 
 public class Location_Update extends AppCompatActivity {
 
-    TextView userId, userName, userEmail, userRole, userLocation;
+    TextView userId, userName, userEmail, userRole, userLocation,userTruckNumber;
     String userIdValue, userNameValue, userEmailValue, userRoleValue, userLocationValue,userPasswordValue;
     AutoCompleteTextView autoCompleteTextView;
     Button updateLocationButton;
+    TextInputEditText truckNumber;
 
     private ArrayList<String> orderList;
     private ArrayList<LocationClass> itemsArrayList;
     ArrayAdapter<String> adapter;
 
     private FirebaseFirestore db ;
+    String truckNumberValue,newTruckNumberValue;;
 
     Dialog dialog;
 
@@ -53,6 +57,8 @@ public class Location_Update extends AppCompatActivity {
         userLocation = findViewById(R.id.location_field);
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
         updateLocationButton = findViewById(R.id.update);
+        truckNumber = findViewById(R.id.truckNumber);
+        userTruckNumber = findViewById(R.id.truckNO_field);
 
         //get the data from the intent
         userIdValue = getIntent().getStringExtra("userId");
@@ -61,6 +67,7 @@ public class Location_Update extends AppCompatActivity {
         userRoleValue = getIntent().getStringExtra("userRole");
         userLocationValue = getIntent().getStringExtra("userLocation");
         userPasswordValue = getIntent().getStringExtra("userPassword");
+        truckNumberValue = getIntent().getStringExtra("userTrack");
 
         //set the data to the views
         userId.setText(userIdValue);
@@ -68,6 +75,7 @@ public class Location_Update extends AppCompatActivity {
         userEmail.setText(userEmailValue);
         userRole.setText(userRoleValue);
         userLocation.setText(userLocationValue);
+        userTruckNumber.setText(truckNumberValue);
 
         dialog = new MaterialAlertDialogBuilder(this)
                 .setView(new ProgressBar(this))
@@ -102,11 +110,18 @@ public class Location_Update extends AppCompatActivity {
         //update click listener
         updateLocationButton.setOnClickListener(v -> {
 
+            //get the truck number
+            newTruckNumberValue = Objects.requireNonNull(truckNumber.getText()).toString();
+
             //check if autocomplete textview is empty
             if (autoCompleteTextView.getText().toString().isEmpty()) {
                 autoCompleteTextView.setError("Select a location");
                 autoCompleteTextView.requestFocus();
-
+            }
+            //check if truck number is empty
+            else if (truckNumber.getText().toString().isEmpty()) {
+                truckNumber.setError("Enter truck number");
+                truckNumber.requestFocus();
             }
             else {
                 //update the location
@@ -123,12 +138,14 @@ public class Location_Update extends AppCompatActivity {
         dialog.show();
         db.collection("users")
                 .document(userIdValue)
-                .update("location", userLocationValue)
+                .update("location", userLocationValue, "truckNumber", newTruckNumberValue)
                 .addOnSuccessListener(aVoid -> {
                     dialog.dismiss();
                     Toast.makeText(Location_Update.this, "Location updated successfully", Toast.LENGTH_SHORT).show();
 
                     //move to location assignment
+                    Intent intent = new Intent(Location_Update.this, Location_Assignment.class);
+                    startActivity(intent);
                     finish();
                 })
                 .addOnFailureListener(e -> {

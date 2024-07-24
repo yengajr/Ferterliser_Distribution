@@ -152,12 +152,35 @@
             android:textSize="18sp"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Truck NO :"
+            android:id="@+id/truckNO_txt"
+            android:layout_below="@+id/identifier_field"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123456789"
+            android:id="@+id/truckNO_field"
+            android:layout_toEndOf="@+id/truckNO_txt"
+            android:layout_below="@+id/identifier_field"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Update User"
             android:id="@+id/update"
-            android:layout_below="@+id/identifier_field"
+            android:layout_below="@+id/truckNO_field"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
@@ -177,6 +200,24 @@
             android:completionThreshold="1"
             android:background="@drawable/textview_design"
             android:hint="Select Location" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_below="@+id/autoCompleteTextView"
+            android:id="@+id/textField2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Truck Number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/truckNumber"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
     </RelativeLayout>

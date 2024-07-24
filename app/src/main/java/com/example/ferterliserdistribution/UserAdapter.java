@@ -51,6 +51,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ProductViewHol
             intent.putExtra("userRole", user.getRoleValue());
             intent.putExtra("userLocation", user.getLocation());
             intent.putExtra("userStatus", user.getPassword());
+            intent.putExtra("userTrack", user.getTruckNumber());
             context.startActivity(intent);
         });
     }

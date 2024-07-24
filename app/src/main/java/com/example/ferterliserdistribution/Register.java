@@ -79,6 +79,7 @@ public class Register extends AppCompatActivity {
             String confirmPasswordValue = Objects.requireNonNull(confirm_password.getText()).toString().trim();
             String roleValue = spinner.getSelectedItem().toString().trim();
             location = "Null";
+            String truckNoValue = "Null";
 
             //validate the values
             if (nameValue.isEmpty() || emailValue.isEmpty() || passwordValue.isEmpty() || confirmPasswordValue.isEmpty()) {
@@ -102,7 +103,7 @@ public class Register extends AppCompatActivity {
 
                                 // Add user details to firestore
                                 db.collection("users").document(user2) // Using "users" collection
-                                        .set(new User(nameValue, emailValue, passwordValue, roleValue,user2,location)) // Include roleValue
+                                        .set(new User(nameValue, emailValue, passwordValue, roleValue,user2,location,truckNoValue)) // Include roleValue
                                         .addOnSuccessListener(aVoid -> {
                                             dialog.dismiss();
                                             // Sign in success, update UI with the signed-in user's information

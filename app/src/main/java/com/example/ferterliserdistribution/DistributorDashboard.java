@@ -13,11 +13,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 
 public class DistributorDashboard extends AppCompatActivity {
 
-    TextView welcomeText,tittleText;
+    TextView welcomeText,tittleText,nameSpace;
     private FirebaseAuth mAuth;
+
+    FirebaseFirestore db;
+    String userId;
 
     private boolean doubleBackToExitPressedOnce = false;
     private static final int BACK_PRESS_DELAY = 2000; // 2 second
@@ -48,10 +54,22 @@ public class DistributorDashboard extends AppCompatActivity {
 
         welcomeText = findViewById(R.id.welcomeMessage);
         tittleText = findViewById(R.id.appTitle);
+        nameSpace = findViewById(R.id.distributor_name);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-        //welome click
+        //get user details
+        db.collection("users").document(userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                nameSpace.setText("Welcome " + task.getResult().getString("name"));
+            }
+
+        });
+
+
+        //welcome click
         welcomeText.setOnClickListener(v -> {
             //logout
             mAuth.signOut();
