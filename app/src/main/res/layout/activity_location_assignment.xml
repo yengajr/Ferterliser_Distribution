@@ -8,7 +8,7 @@
     android:fillViewport="true"
     tools:context=".Location_Assignment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -17,38 +17,55 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="@string/welcome"
+            android:text="Location Management"
             android:textSize="30sp" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Add New destination"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentEnd="true"
+            android:text="Ckeckout\nDestinations"
+            android:textAlignment="center"
             android:textSize="20sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/deliveryPerson"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Deliver Personel"
+            android:layout_below="@id/textView2"
+            android:textSize="18sp" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_marginTop="20dp"
-            android:padding="12dp"
-            android:orientation="vertical" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/deliveryPerson"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_margin="16dp"
             android:src="@drawable/refresh"
             android:contentDescription="Refresh"
             android:id="@+id/fab" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </ScrollView>

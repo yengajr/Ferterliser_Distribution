@@ -31,21 +31,34 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="location_update"
+            android:layout_marginBottom="30dp"
             android:textSize="25sp"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
 
             />
 
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/order_design"
+            android:padding="2dp"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name :"
             android:id="@+id/name_txt"
-            android:layout_below="@+id/textView"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             />
 
         <TextView
@@ -54,7 +67,6 @@
             android:text="Distributor1"
             android:id="@+id/name_field"
             android:layout_toEndOf="@+id/name_txt"
-            android:layout_below="@+id/textView"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
@@ -66,9 +78,10 @@
             android:text="Role :"
             android:id="@+id/role_txt"
             android:layout_below="@+id/name_field"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             />
 
         <TextView
@@ -89,9 +102,10 @@
             android:text="Location :"
             android:id="@+id/location_txt"
             android:layout_below="@+id/role_field"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             />
 
         <TextView
@@ -112,9 +126,10 @@
             android:text="Email :"
             android:id="@+id/email_txt"
             android:layout_below="@+id/location_field"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             />
 
         <TextView
@@ -135,9 +150,10 @@
             android:text="Identifier :"
             android:id="@+id/identifier_txt"
             android:layout_below="@+id/email_field"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             />
 
         <TextView
@@ -158,9 +174,10 @@
             android:text="Truck NO :"
             android:id="@+id/truckNO_txt"
             android:layout_below="@+id/identifier_field"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             />
 
         <TextView
@@ -175,12 +192,14 @@
             android:textSize="18sp"
             />
 
+        </RelativeLayout>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Update User"
             android:id="@+id/update"
-            android:layout_below="@+id/truckNO_field"
+            android:layout_below="@+id/relativeLayout"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"

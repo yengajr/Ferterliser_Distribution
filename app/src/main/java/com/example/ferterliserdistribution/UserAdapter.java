@@ -37,7 +37,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ProductViewHol
         holder.userName.setText(user.getName());
         holder.userEmail.setText(user.getEmail());
         holder.userRole.setText(user.getRoleValue());
-        holder.userLocation.setText(user.getLocation());
+        //check if location is Null and change color to red else green
+        if (user.getLocation().equals("Null")) {
+            holder.userLocation.setText(user.getLocation());
+            holder.userLocation.setTextColor(context.getResources().getColor(R.color.red));
+        } else {
+            holder.userLocation.setText(user.getLocation());
+            holder.userLocation.setTextColor(context.getResources().getColor(R.color.green));
+        }
         holder.userStatus.setText(user.getPassword());
         holder.userId.setText(user.getUserId());
 
