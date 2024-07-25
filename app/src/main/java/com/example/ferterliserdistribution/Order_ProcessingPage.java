@@ -13,16 +13,21 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.MessageFormat;
+import java.util.Objects;
 
 public class Order_ProcessingPage extends AppCompatActivity {
 
     TextView orderId, orderDate, orderStatus, orderQuantity, orderTime, orderName,orderPhone,orderAddress,orderProcess;
-    String id, date, status, quantity, time, name, phone, address;
+    String id, date, status, quantity, time, name, phone, address,deliveryPerson;
     FirebaseFirestore db;
     Dialog dialog;
+
+    private FirebaseAuth mAuth;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,17 @@ public class Order_ProcessingPage extends AppCompatActivity {
 
         //firebase initialisation
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+        //get user details
+        db.collection("users").document(userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+               //store the name in string deliveryPerson
+                deliveryPerson = task.getResult().getString("name");
+            }
+
+        });
 
         //dialog initialisation
         dialog = new MaterialAlertDialogBuilder(this)
@@ -142,17 +158,32 @@ public class Order_ProcessingPage extends AppCompatActivity {
 
         dialog.show();
         //update status
-        db.collection("Orders").document("Customer").collection("order").document(id).update("served", String.valueOf(Integer.parseInt(status) + 1))
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                    else {
-                        //toast message
-                        Toast.makeText(Order_ProcessingPage.this, "Failed to update status", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
+        if (status.equals("3")) {
+            db.collection("Orders").document("Customer").collection("order").document(id).update("served", String.valueOf(Integer.parseInt(status) + 1), "distributor", deliveryPerson)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            dialog.dismiss();
+                            finish();
+                        } else {
+                            //toast message
+                            Toast.makeText(Order_ProcessingPage.this, "Failed to update status", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    });
+        }
+        else{
+            db.collection("Orders").document("Customer").collection("order").document(id).update("served", String.valueOf(Integer.parseInt(status) + 1))
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                        else {
+                            //toast message
+                            Toast.makeText(Order_ProcessingPage.this, "Failed to update status", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    });
+        }
     }
 }

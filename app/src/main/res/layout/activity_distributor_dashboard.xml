@@ -17,12 +17,13 @@
             android:id="@+id/appTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Distributor Dashboard"
+            android:text="Check Orders"
             android:textSize="24sp"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="64dp"/>
+            android:layout_below="@+id/distributor_name"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/welcomeMessage"
@@ -31,9 +32,22 @@
             android:text="Log out"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true"
             android:layout_below="@id/appTitle"
             android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/distributor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Distributor"
+            android:textSize="25sp"
+            android:padding="15dp"
+            android:background="@drawable/topbox_design"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"/>
 
     </RelativeLayout>
 

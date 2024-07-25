@@ -7,17 +7,19 @@ public class User {
     private String roleValue;
     private String userId;
     private String location;
+    private String truckNumber;
 
     public User() {
     }
 
-    public User(String name, String email, String password, String roleValue, String userId, String location) {
+    public User(String name, String email, String password, String roleValue, String userId, String location, String truckNumber) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.roleValue = roleValue;
         this.userId = userId;
         this.location = location;
+        this.truckNumber = truckNumber;
     }
 
     public String getName() {
@@ -66,6 +68,14 @@ public class User {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getTruckNumber() {
+        return truckNumber;
+    }
+
+    public void setTruckNumber(String truckNumber) {
+        this.truckNumber = truckNumber;
     }
 
 }
