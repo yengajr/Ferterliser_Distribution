@@ -135,7 +135,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CardViewHolder
             public void onClick(View v) {
                 //delete the item from the cart
                 cardItemList.remove(position);
-                notifyItemRemoved(position);
+                notifyItemRemoved(position); //notifyItemRemoved(position)//
                 notifyItemRangeChanged(position, cardItemList.size());
                 Product_Cart.getInstance().removeFromCart(cardItem);
                 Toast.makeText(v.getContext(), cardItem.getName()+" removed from cart", Toast.LENGTH_SHORT).show();
