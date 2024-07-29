@@ -11,7 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FertiliserDistribution"
+        tools:replace="android:icon"
         tools:targetApi="31">
+        <activity
+            android:name=".LowStock"
+            android:exported="false" />
+        <activity
+            android:name=".RemainigStock"
+            android:exported="false" />
+        <activity
+            android:name=".Reports"
+            android:exported="false" />
+        <activity
+            android:name=".SalesAnalysis"
+            android:exported="false" />
         <activity
             android:name=".Location_Update"
             android:exported="false" />
