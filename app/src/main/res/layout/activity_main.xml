@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1CF309"
+    android:background="#4A340D"
     tools:context=".MainActivity">
 
     <ImageView
@@ -35,8 +35,8 @@
         android:text="Shop the best fertilizer for your crops and get it delivered to your doorstep"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:background="#D7225B1D"
-        android:textColor="#1CF309"
+        android:background="#D7010700"
+        android:textColor="#DDE8DC"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/logo"
         android:id="@+id/appTitle" />
