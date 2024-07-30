@@ -60,7 +60,7 @@ public class AdminNavigation extends AppCompatActivity {
         });
 
         sales.setOnClickListener(v -> {
-            startActivity(new Intent(AdminNavigation.this, Reports.class));
+            startActivity(new Intent(AdminNavigation.this, SalesAnalysis.class));
         });
 
 
