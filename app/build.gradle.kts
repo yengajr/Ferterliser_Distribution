@@ -45,4 +45,20 @@ dependencies {
 
     implementation ("com.github.dhaval2404:imagepicker:2.1")
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation ("com.github.AnyChart:AnyChart-Android:1.1.5")
+
+
+    implementation("cn.pedant.sweetalert:library:1.3") {
+        exclude (group = "com.android.support")
+    }
+    implementation ("com.jakewharton.timber:timber:4.7.1")
+    implementation ("com.squareup.retrofit2:retrofit:2.5.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.5.0")
+
+    implementation ("com.squareup.okhttp3:okhttp:3.12.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:3.12.0")
+
+    implementation ("com.google.code.gson:gson:2.8.5")
+    implementation ("com.squareup.okio:okio:2.1.0")
 }

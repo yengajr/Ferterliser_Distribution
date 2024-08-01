@@ -59,5 +59,10 @@ public class AdminNavigation extends AppCompatActivity {
             startActivity(new Intent(AdminNavigation.this, InventoryManagement.class));
         });
 
+        sales.setOnClickListener(v -> {
+            startActivity(new Intent(AdminNavigation.this, SalesAnalysis.class));
+        });
+
+
     }
 }
