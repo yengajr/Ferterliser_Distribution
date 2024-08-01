@@ -87,7 +87,8 @@ public class Reports extends AppCompatActivity {
         dialog.show();
 
         back.setOnClickListener(v -> {
-            finish();
+            //navigate to admin dashboard
+            startActivity(new Intent(Reports.this, AdminNavigation.class));
         });
 
         //get current date
