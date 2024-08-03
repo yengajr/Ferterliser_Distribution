@@ -10,7 +10,6 @@
     <string name="welcome">Welcome</string>
 
     <string-array name="role_array">
-        <item>Admin</item>
         <item>User</item>
         <item>Distributor</item>
         <item>Delivery</item>

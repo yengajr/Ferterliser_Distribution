@@ -5,30 +5,84 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="5dp"
     tools:context=".Delivery_orderCheck">
 
-    <TextView
-        android:id="@+id/order_id"
+    <RelativeLayout
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/topbox_design"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true">
+
+    <TextView
+        android:id="@+id/delivery_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delivery"
-        android:textSize="22sp"
+        android:textAlignment="center"
+        android:text="Welcome Delivery"
+        android:textSize="25sp"
+        android:padding="15dp"
+        android:background="@drawable/topbox_design"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="120dp"
+        android:layout_height="90dp"
+        android:layout_below="@id/delivery_name"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/trcuck"
+        android:id="@+id/truck_pic"
+        android:contentDescription="track" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Truck Number"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="21sp"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@id/truck_pic"
+        android:layout_above="@+id/truck_route"
+        android:layout_marginTop="16dp"
+        android:id="@+id/truck_number"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Track Route"
+        android:textAlignment="center"
+        android:textSize="21sp"
+        android:textColor="@color/black"
+        android:layout_above="@+id/recyclerView"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/truck_pic"
+        android:layout_marginTop="16dp"
+        android:textStyle="italic"
+        android:id="@+id/truck_route"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="2dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:id="@+id/recyclerView"
-        android:layout_below="@+id/order_id"
+        android:layout_below="@+id/truck_pic"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         />
 
@@ -44,5 +98,7 @@
         app:fabSize="normal"
         android:id="@+id/fab"
         android:contentDescription="Refresh button" />
+
+        </RelativeLayout>
 
 </RelativeLayout>

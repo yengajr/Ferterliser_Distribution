@@ -73,12 +73,6 @@ public class Login extends AppCompatActivity {
                     String role = task1.getResult().getString("roleValue");
                     if (role != null) {
                         switch (role) {
-                            case "Admin":
-                                //redirect to admin dashboard
-                                startActivity(new Intent(Login.this, AdminDashboard.class));
-                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                                break;
                             case "Distributor":
                                 //redirect to distributor dashboard
                                 startActivity(new Intent(Login.this, DistributorDashboard.class));
@@ -93,7 +87,7 @@ public class Login extends AppCompatActivity {
 
                             case "Delivery":
                                 //redirect to delivery dashboard
-                                startActivity(new Intent(Login.this, DeliveryDashboard.class));
+                                startActivity(new Intent(Login.this, Delivery_orderCheck.class));
                                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                                 break;
@@ -173,12 +167,6 @@ public class Login extends AppCompatActivity {
                                                     String role = task1.getResult().getString("roleValue");
                                                     if (role != null) {
                                                         switch (role) {
-                                                            case "Admin":
-                                                                //redirect to admin dashboard
-                                                                startActivity(new Intent(Login.this, AdminDashboard.class));
-                                                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-                                                                dialog.dismiss();
-                                                                break;
                                                             case "Distributor":
                                                                 //redirect to distributor dashboard
                                                                 startActivity(new Intent(Login.this, DistributorDashboard.class));
@@ -194,7 +182,7 @@ public class Login extends AppCompatActivity {
 
                                                             case "Delivery":
                                                                 //redirect to delivery dashboard
-                                                                startActivity(new Intent(Login.this, DeliveryDashboard.class));
+                                                                startActivity(new Intent(Login.this, Delivery_orderCheck.class));
                                                                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                                                                 dialog.dismiss();
                                                                 break;

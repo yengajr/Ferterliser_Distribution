@@ -2,7 +2,10 @@ package com.example.ferterliserdistribution;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -27,6 +30,7 @@ import java.util.Objects;
 public class Delivery_orderCheck extends AppCompatActivity {
 
     RecyclerView recyclerView;
+    TextView nameSpace,truckSpace,routesSpace;
 
     Order_ProcessingAdapter order_processingAdapter;
     ArrayList<Order> orderArrayList;
@@ -37,6 +41,22 @@ public class Delivery_orderCheck extends AppCompatActivity {
     String location, userId;
 
     private FirebaseAuth mAuth;
+
+    private boolean doubleBackToExitPressedOnce = false;
+    private static final int BACK_PRESS_DELAY = 2000; // 2 second
+
+    // Override the onBackPressed method
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            finishAffinity();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, BACK_PRESS_DELAY);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +72,10 @@ public class Delivery_orderCheck extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         fab = findViewById(R.id.fab);
 
+        nameSpace = findViewById(R.id.delivery_name);
+        truckSpace = findViewById(R.id.truck_number);
+        routesSpace = findViewById(R.id.truck_route);
+
         //dialog
         dialog = new MaterialAlertDialogBuilder(this)
                 .setView(new ProgressBar(this))
@@ -63,6 +87,9 @@ public class Delivery_orderCheck extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        //initialize the database
+        db = FirebaseFirestore.getInstance();
+
 
         fab.setOnClickListener(v -> {
             //clear the arraylist
@@ -71,8 +98,6 @@ public class Delivery_orderCheck extends AppCompatActivity {
             GetOrders();
         });
 
-        //initialize the database
-        db = FirebaseFirestore.getInstance();
 
         orderArrayList = new ArrayList<>();
         order_processingAdapter = new Order_ProcessingAdapter(this, orderArrayList);
@@ -80,14 +105,20 @@ public class Delivery_orderCheck extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        GetOrders();
         CurrentUserDetails();
+
+
     }
 
     private void CurrentUserDetails() {
         db.collection("users").document(userId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 location = task.getResult().getString("location");
+                nameSpace.setText("Welcome " + task.getResult().getString("name"));
+                truckSpace.setText("Truck  :"+task.getResult().getString("truckNumber"));
+                routesSpace.setText("Route  :"+task.getResult().getString("location"));
+
+                GetOrders();
             }
         });
     }
