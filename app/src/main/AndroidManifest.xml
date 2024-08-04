@@ -50,9 +50,6 @@
             android:name=".UserDashboard"
             android:exported="false" />
         <activity
-            android:name=".DistributorDashboard"
-            android:exported="false" />
-        <activity
             android:name=".Login"
             android:exported="false" />
         <activity

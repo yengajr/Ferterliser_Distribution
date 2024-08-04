@@ -75,7 +75,7 @@ public class Login extends AppCompatActivity {
                         switch (role) {
                             case "Distributor":
                                 //redirect to distributor dashboard
-                                startActivity(new Intent(Login.this, DistributorDashboard.class));
+                                startActivity(new Intent(Login.this, Distributor_OrderCheck.class));
                                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                                 break;
@@ -169,7 +169,7 @@ public class Login extends AppCompatActivity {
                                                         switch (role) {
                                                             case "Distributor":
                                                                 //redirect to distributor dashboard
-                                                                startActivity(new Intent(Login.this, DistributorDashboard.class));
+                                                                startActivity(new Intent(Login.this, Distributor_OrderCheck.class));
                                                                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                                                                 dialog.dismiss();
                                                                 break;

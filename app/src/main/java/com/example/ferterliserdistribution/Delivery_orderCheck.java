@@ -1,6 +1,7 @@
 package com.example.ferterliserdistribution;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ProgressBar;
@@ -30,7 +31,7 @@ import java.util.Objects;
 public class Delivery_orderCheck extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    TextView nameSpace,truckSpace,routesSpace;
+    TextView nameSpace,truckSpace,routesSpace,logOut;
 
     Order_ProcessingAdapter order_processingAdapter;
     ArrayList<Order> orderArrayList;
@@ -75,6 +76,7 @@ public class Delivery_orderCheck extends AppCompatActivity {
         nameSpace = findViewById(R.id.delivery_name);
         truckSpace = findViewById(R.id.truck_number);
         routesSpace = findViewById(R.id.truck_route);
+        logOut = findViewById(R.id.logout);
 
         //dialog
         dialog = new MaterialAlertDialogBuilder(this)
@@ -96,6 +98,12 @@ public class Delivery_orderCheck extends AppCompatActivity {
             orderArrayList.clear();
             dialog.show();
             GetOrders();
+        });
+
+        logOut.setOnClickListener(v -> {
+            //logout
+            mAuth.signOut();
+            startActivity(new Intent(Delivery_orderCheck.this, Login.class));
         });
 
 

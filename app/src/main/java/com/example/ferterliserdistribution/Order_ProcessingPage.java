@@ -2,6 +2,7 @@ package com.example.ferterliserdistribution;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,6 +86,14 @@ public class Order_ProcessingPage extends AppCompatActivity {
         orderPhone.setText(phone);
         orderAddress.setText(address);
 
+        //hide button if status is 4 and 5
+        if (status.equals("4") || status.equals("5")){
+            orderProcess.setVisibility(View.GONE);
+        }
+        else{
+            orderProcess.setVisibility(View.VISIBLE);
+        }
+
         //Check status value and set the text
         switch (status){
             case "0":
@@ -140,7 +149,7 @@ public class Order_ProcessingPage extends AppCompatActivity {
                 orderProcess.setText("DISPATCH");
                 break;
             case "3":
-                orderProcess.setText("DELIVER");
+                orderProcess.setText("Confirm Delivery");
                 break;
             default:
                 orderProcess.setText("CANCEL");

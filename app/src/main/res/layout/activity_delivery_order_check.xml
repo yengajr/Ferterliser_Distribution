@@ -28,8 +28,22 @@
         android:background="@drawable/topbox_design"
         android:textStyle="bold"
         android:textColor="@color/black"
+        android:layout_toLeftOf="@id/logout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"/>
+        android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log\nout"
+            android:background="@drawable/topbox_design"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="120dp"
