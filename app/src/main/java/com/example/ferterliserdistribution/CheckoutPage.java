@@ -114,11 +114,8 @@ public class CheckoutPage extends AppCompatActivity {
                 .create();
         //getting current date
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //currentDate = dateFormat.format(new Date());
+        currentDate = dateFormat.format(new Date());
 
-        //get the month
-        SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
-        currentDate = monthFormat.format(new Date());
 
         //get current time
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
@@ -355,9 +352,10 @@ public class CheckoutPage extends AppCompatActivity {
             soldData.put("itemCount", product.getItemCount());
             soldData.put("paymentNumber", phoneNumber);
             soldData.put("totalPrice", product.getItemTotal());
+            soldData.put("orderDate", currentDate);
 
             db.collection("SalesReport")
-                    .document(currentDate)
+                    .document("currentDate")
                     .collection("Items")
                     .add(soldData)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
