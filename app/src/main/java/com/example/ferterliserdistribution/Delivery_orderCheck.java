@@ -148,7 +148,7 @@ public class Delivery_orderCheck extends AppCompatActivity {
 
                 for (Order order : value.toObjects(Order.class)) {
                     //add orders whose served value is 1
-                    if (Objects.equals(order.getServed(), "3") && Objects.equals(order.getOrderAddress(), location)){
+                    if (Objects.equals(order.getServed(), "2") && Objects.equals(order.getOrderAddress(), location)){
                         orderArrayList.add(order);
                     }
                 }
