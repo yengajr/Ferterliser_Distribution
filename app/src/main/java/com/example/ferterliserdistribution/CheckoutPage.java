@@ -114,7 +114,11 @@ public class CheckoutPage extends AppCompatActivity {
                 .create();
         //getting current date
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        currentDate = dateFormat.format(new Date());
+        //currentDate = dateFormat.format(new Date());
+
+        //get the month
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+        currentDate = monthFormat.format(new Date());
 
         //get current time
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
