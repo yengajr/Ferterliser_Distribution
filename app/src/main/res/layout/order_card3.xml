@@ -4,6 +4,9 @@
     android:orientation="vertical"
     android:layout_marginTop="5dp"
     android:layout_gravity="center_vertical"
+    android:background="@drawable/topbox_design"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -63,5 +66,17 @@
             android:text="Identifier" />
 
     </RelativeLayout>
+
+    <!-- Products List within the Order -->
+    <LinearLayout
+        android:id="@+id/products_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Product items will be added dynamically here -->
+
+    </LinearLayout>
 
 </LinearLayout>

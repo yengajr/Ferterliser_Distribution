@@ -1,24 +1,32 @@
 package com.example.ferterliserdistribution;
 
+import java.util.List;
+import java.util.Map;
+
 public class Order {
-String emailAddress,itemCount,itemId,orderDate,paymentNumber,productCategory,productName,orderTime,orderAddress,served,distributor,cumulativePrice;
+    private String emailAddress;
+    private String orderId;
+    private String orderDate;
+    private String paymentNumber;
+    private String orderTime;
+    private String orderAddress;
+    private String served;
+    private String distributor;
+    private List<Map<String, Object>> products; // List to store multiple products in the order
 
     public Order() {
     }
 
-    public Order(String emailAddress, String itemCount, String itemId, String orderDate, String paymentNumber, String productCategory, String productName, String served, String orderTime, String orderAddress, String distributor, String cumulativePrice) {
+    public Order(String emailAddress, String orderDate, String paymentNumber, String orderTime, String orderAddress, String served, String distributor,String orderId, List<Map<String, Object>> products) {
         this.emailAddress = emailAddress;
-        this.itemCount = itemCount;
-        this.itemId = itemId;
         this.orderDate = orderDate;
         this.paymentNumber = paymentNumber;
-        this.productCategory = productCategory;
-        this.productName = productName;
-        this.served = served;
         this.orderTime = orderTime;
         this.orderAddress = orderAddress;
+        this.served = served;
         this.distributor = distributor;
-        this.cumulativePrice = cumulativePrice;
+        this.products = products;
+        this.orderId = orderId;
     }
 
     public String getEmailAddress() {
@@ -27,22 +35,6 @@ String emailAddress,itemCount,itemId,orderDate,paymentNumber,productCategory,pro
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-
-    public String getItemCount() {
-        return itemCount;
-    }
-
-    public void setItemCount(String itemCount) {
-        this.itemCount = itemCount;
-    }
-
-    public String getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(String itemId) {
-        this.itemId = itemId;
     }
 
     public String getOrderDate() {
@@ -61,30 +53,6 @@ String emailAddress,itemCount,itemId,orderDate,paymentNumber,productCategory,pro
         this.paymentNumber = paymentNumber;
     }
 
-    public String getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getServed() {
-        return served;
-    }
-
-    public void setServed(String served) {
-        this.served = served;
-    }
-
     public String getOrderTime() {
         return orderTime;
     }
@@ -101,6 +69,14 @@ String emailAddress,itemCount,itemId,orderDate,paymentNumber,productCategory,pro
         this.orderAddress = orderAddress;
     }
 
+    public String getServed() {
+        return served;
+    }
+
+    public void setServed(String served) {
+        this.served = served;
+    }
+
     public String getDistributor() {
         return distributor;
     }
@@ -109,16 +85,19 @@ String emailAddress,itemCount,itemId,orderDate,paymentNumber,productCategory,pro
         this.distributor = distributor;
     }
 
-    public String getCumulativePrice() {
-        return cumulativePrice;
+    public List<Map<String, Object>> getProducts() {
+        return products;
     }
 
-    public void setCumulativePrice(String cumulativePrice) {
-        this.cumulativePrice = cumulativePrice;
+    public void setProducts(List<Map<String, Object>> products) {
+        this.products = products;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
 
-
-
-
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
 }

@@ -168,7 +168,7 @@ public class Distributor_OrderCheck extends AppCompatActivity {
 
                 for (Order order : value.toObjects(Order.class)) {
                     //add orders whose served value is 2, 3 or 4
-                    if (order.served.equals("3") || order.served.equals("4") || order.served.equals("5")) {
+                    if (order.getServed().equals("2") || order.getServed().equals("3") || order.getServed().equals("4")) {
                         orderArrayList.add(order);
                     }
                 }
@@ -196,7 +196,7 @@ public class Distributor_OrderCheck extends AppCompatActivity {
 
                 for (Order order : value.toObjects(Order.class)) {
                     //add orders whose served value is 2, 3 or 4
-                    if (order.served.equals("3")) {
+                    if (order.getServed().equals("3")) {
                         orderArrayList.add(order);
                     }
                 }
@@ -224,7 +224,7 @@ public class Distributor_OrderCheck extends AppCompatActivity {
 
                 for (Order order : value.toObjects(Order.class)) {
                     //add orders whose served value is 2, 3 or 4
-                    if (order.served.equals("4")) {
+                    if (order.getServed().equals("4")) {
                         orderArrayList.add(order);
                     }
                 }
@@ -252,7 +252,7 @@ public class Distributor_OrderCheck extends AppCompatActivity {
 
                 for (Order order : value.toObjects(Order.class)) {
                     //add orders whose served value is 2, 3 or 4
-                    if (order.served.equals("5")) {
+                    if (order.getServed().equals("5")) {
                         orderArrayList.add(order);
                     }
                 }

@@ -4,6 +4,9 @@
     android:orientation="vertical"
     android:layout_marginTop="5dp"
     android:layout_gravity="center_vertical"
+    android:background="@drawable/topbox_design"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -16,7 +19,7 @@
             android:id="@+id/name_space"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fertilizer type"
+            android:text="Customer Name"
             android:textStyle="bold"
             android:textSize="20sp" />
 
@@ -25,7 +28,7 @@
             android:background="@color/white"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="127dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name_space"
             android:textAlignment="center"
@@ -41,13 +44,13 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="3dp"
-            android:text="Fertilizer Quantity"
+            android:text="Order Date"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/order_count"
-            android:layout_width="134dp"
+            android:layout_width="wrap_content"
             android:background="@color/white"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
@@ -56,7 +59,7 @@
             android:layout_alignStart="@id/quantity_space"
             android:textAlignment="center"
             android:layout_marginTop="2dp"
-            android:text="Count"
+            android:text="Date"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -67,6 +70,17 @@
             android:layout_below="@id/order_count"
             android:layout_marginTop="2dp"
             android:text="Destination"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/status_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order_count"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:text="Status"
             android:textStyle="bold"
             android:textSize="20sp" />
 
@@ -84,13 +98,18 @@
             android:text="Address"
             android:textSize="17sp" />
 
-
-
-
-
-
-
-
     </RelativeLayout>
+
+    <!-- Products List within the Order -->
+    <LinearLayout
+        android:id="@+id/products_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Product items will be added dynamically here -->
+
+    </LinearLayout>
 
 </LinearLayout>

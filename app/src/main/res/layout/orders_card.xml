@@ -3,52 +3,17 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="5dp"
-    android:layout_gravity="center_vertical"
+    android:background="@drawable/topbox_design"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
     android:layout_height="wrap_content">
 
+    <!-- Order Header Information -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/order_design"
         android:padding="4dp">
-
-        <TextView
-            android:id="@+id/order_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/order_date"
-            android:layout_marginTop="2dp"
-            android:text="Name"
-            android:textStyle="bold"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/order_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/order_name"
-            android:layout_marginTop="2dp"
-            android:text="Count"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/order_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="Status"
-            android:textSize="17sp" />
-
-
-        <TextView
-            android:id="@+id/order_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/order_count"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="2dp"
-            android:text="Address"
-            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/order_date"
@@ -67,24 +32,51 @@
             android:textSize="17sp" />
 
         <TextView
+            android:id="@+id/order_id_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_date"
+            android:layout_marginTop="7dp"
+            android:textStyle="bold"
+            android:text="Order ID: " />
+
+        <TextView
             android:id="@+id/order_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/order_count"
+            android:layout_below="@+id/order_date"
+            android:layout_toEndOf="@+id/order_id_label"
             android:layout_marginTop="7dp"
-            android:textStyle="bold"
-            android:text="ID: " />
-
-        <TextView
-            android:id="@+id/id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/order_count"
-            android:layout_marginTop="7dp"
-            android:layout_toEndOf="@+id/order_id"
             android:textStyle="bold"
             android:text="Identifier" />
 
+        <TextView
+            android:id="@+id/order_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Status"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/order_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_id"
+            android:layout_marginTop="2dp"
+            android:text="Address"
+            android:textSize="17sp" />
     </RelativeLayout>
 
+    <!-- Products List within the Order -->
+    <LinearLayout
+        android:id="@+id/products_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Product items will be added dynamically here -->
+
+    </LinearLayout>
 </LinearLayout>
