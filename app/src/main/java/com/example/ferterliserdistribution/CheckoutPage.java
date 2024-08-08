@@ -132,12 +132,7 @@ public class CheckoutPage extends AppCompatActivity {
             orderAddress = location;
 
             // Perform STK push
-         //   performSTKPush();
-
-            //call database methods
-            customerOrders();
-            updateQuantities();
-            soldProducts();
+           performSTKPush();
 
 
                 dialog.show();
@@ -172,8 +167,7 @@ public class CheckoutPage extends AppCompatActivity {
         totalPrice1 = String.valueOf(total1);
 
         totalTextView.setText(totalPrice1);
-
-      //  getAccessToken();
+        getAccessToken();
 
     }
 
