@@ -39,7 +39,7 @@ public class Delivery_orderCheck extends AppCompatActivity {
 
     FirebaseFirestore db;
     Dialog dialog;
-    String location, userId;
+    String location, userId,email;
 
     private FirebaseAuth mAuth;
 
@@ -122,6 +122,7 @@ public class Delivery_orderCheck extends AppCompatActivity {
         db.collection("users").document(userId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 location = task.getResult().getString("location");
+                email = task.getResult().getString("email");
                 nameSpace.setText("Welcome " + task.getResult().getString("name"));
                 truckSpace.setText("Truck  :"+task.getResult().getString("truckNumber"));
                 routesSpace.setText("Route  :"+task.getResult().getString("location"));
@@ -147,10 +148,11 @@ public class Delivery_orderCheck extends AppCompatActivity {
                 orderArrayList.clear();
 
                 for (Order order : value.toObjects(Order.class)) {
-                    //add orders whose served value is 1
-                    if (Objects.equals(order.getServed(), "2") && Objects.equals(order.getOrderAddress(), location)){
+                    //add orders whose served value is 2 or 3 distributor is equal to email
+                    if ((Objects.equals(order.getServed(), "1") || Objects.equals(order.getServed(), "2") || Objects.equals(order.getServed(), "3") || Objects.equals(order.getServed(), "4")) && Objects.equals(order.getDistributor(), email)) {
                         orderArrayList.add(order);
                     }
+
                 }
                 order_processingAdapter.notifyDataSetChanged();
                 if (dialog.isShowing()) {

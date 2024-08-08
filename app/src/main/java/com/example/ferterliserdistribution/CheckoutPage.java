@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -131,7 +132,13 @@ public class CheckoutPage extends AppCompatActivity {
             orderAddress = location;
 
             // Perform STK push
-            performSTKPush();
+         //   performSTKPush();
+
+            //call database methods
+            customerOrders();
+            updateQuantities();
+            soldProducts();
+
 
                 dialog.show();
         });
@@ -166,7 +173,7 @@ public class CheckoutPage extends AppCompatActivity {
 
         totalTextView.setText(totalPrice1);
 
-        getAccessToken();
+      //  getAccessToken();
 
     }
 
@@ -381,64 +388,60 @@ public class CheckoutPage extends AppCompatActivity {
 
     //method to save the order to the database
     private void customerOrders() {
+        Map<String, Object> orderData = new HashMap<>();
+        List<Map<String, Object>> productsList = new ArrayList<>();
 
         for (final Product product : cartItems) {
-            Map<String, Object> orderData = new HashMap<>();
-            orderData.put("productName", product.getName());
-            orderData.put("itemCount", product.getItemCount());
-            orderData.put("paymentNumber", phoneNumber);
-            orderData.put("emailAddress", emailAddress);
-            orderData.put("orderDate", currentDate);
-            orderData.put("productCategory", product.getCategory());
-            orderData.put("served", "0");
-            orderData.put("orderTime", currentTime);
-            orderData.put("orderAddress", orderAddress);
-            orderData.put("distributor", "none");
-            orderData.put("cumulativePrice", product.getItemTotal());
+            Map<String, Object> productData = new HashMap<>();
+            productData.put("productName", product.getName());
+            productData.put("itemCount", product.getItemCount());
+            productData.put("productCategory", product.getCategory());
+            productData.put("cumulativePrice", product.getItemTotal());
+            productsList.add(productData);
+        }
 
-            db.collection("Orders")
-                    .document("Customer")
-                    .collection("order")
-                    .add(orderData)
-                    .addOnSuccessListener(documentReference -> {
+        orderData.put("products", productsList);
+        orderData.put("paymentNumber", phoneNumber);
+        orderData.put("emailAddress", emailAddress);
+        orderData.put("orderDate", currentDate);
+        orderData.put("orderTime", currentTime);
+        orderData.put("orderAddress", orderAddress);
+        orderData.put("served", "0");
+        orderData.put("distributor", "none");
 
-                        String itemId = documentReference.getId(); // Get the generated unique ID
-                    orderData.put("itemId", itemId);
+        db.collection("Orders")
+                .document("Customer")
+                .collection("order")
+                .add(orderData)
+                .addOnSuccessListener(documentReference -> {
+                    String orderId = documentReference.getId(); // Get the generated unique ID
+                    orderData.put("orderId", orderId);
 
                     db.collection("Orders")
                             .document("Customer")
                             .collection("order")
-                            .document(itemId)
+                            .document(orderId)
                             .set(orderData)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    // Order saved successfully
-                                    Log.d(TAG, "Order saved successfully with ID: " + itemId);
-                                    //updateQuantities();
-                                }
+                            .addOnSuccessListener(aVoid -> {
+                                // Order saved successfully
+                                Log.d(TAG, "Order saved successfully with ID: " + orderId);
+                                // You can update quantities or perform other actions here
                             })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    // Failed to save order
-                                    Log.w(TAG, "Error saving order", e);
-                                    //dismiss the progress dialog
-                                    dialog.dismiss();
-                                }
+                            .addOnFailureListener(e -> {
+                                // Failed to save order
+                                Log.w(TAG, "Error saving order", e);
+                                // Dismiss the progress dialog if you have one
+                                dialog.dismiss();
                             });
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Failed to save order
-                            Log.w(TAG, "Error saving order", e);
-                            //dismiss the progress dialog
-                            dialog.dismiss();
-                        }
-                    });
-        }
+                })
+                .addOnFailureListener(e -> {
+                    // Failed to save order
+                    Log.w(TAG, "Error saving order", e);
+                    // Dismiss the progress dialog if you have one
+                    dialog.dismiss();
+                });
     }
+
 
     //checkout method to save the order to the database
     private void updateQuantities() {

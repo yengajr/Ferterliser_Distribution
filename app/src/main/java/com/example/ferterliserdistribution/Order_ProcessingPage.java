@@ -22,8 +22,8 @@ import java.util.Objects;
 
 public class Order_ProcessingPage extends AppCompatActivity {
 
-    TextView orderId, orderDate, orderStatus, orderQuantity, orderTime, orderName,orderPhone,orderAddress,orderProcess;
-    String id, date, status, quantity, time, name, phone, address,deliveryPerson;
+    TextView orderId, orderDate, orderStatus, orderTime, orderName,orderPhone,orderAddress,orderProcess;
+    String id, date, status, time, name, phone, address,deliveryPerson;
     FirebaseFirestore db;
     Dialog dialog;
 
@@ -39,7 +39,6 @@ public class Order_ProcessingPage extends AppCompatActivity {
         orderId = findViewById(R.id.id);
         orderDate = findViewById(R.id.date);
         orderStatus = findViewById(R.id.status);
-        orderQuantity = findViewById(R.id.count);
         orderTime = findViewById(R.id.time);
         orderName = findViewById(R.id.name);
         orderPhone = findViewById(R.id.phone);
@@ -50,7 +49,6 @@ public class Order_ProcessingPage extends AppCompatActivity {
         id = getIntent().getStringExtra("orderId");
         date = getIntent().getStringExtra("orderDate");
         status = getIntent().getStringExtra("orderStatus");
-        quantity = getIntent().getStringExtra("orderCount");
         time = getIntent().getStringExtra("orderTime");
         name = getIntent().getStringExtra("orderName");
         phone = getIntent().getStringExtra("orderPayment");
@@ -80,7 +78,6 @@ public class Order_ProcessingPage extends AppCompatActivity {
         //set the data to the views
         orderId.setText(MessageFormat.format("Order ID: {0}", id));
         orderDate.setText(date);
-        orderQuantity.setText(quantity);
         orderTime.setText(time);
         orderName.setText(name);
         orderPhone.setText(phone);
@@ -100,16 +97,16 @@ public class Order_ProcessingPage extends AppCompatActivity {
                 orderStatus.setText("Placed");
                 break;
             case "1":
-                orderStatus.setText("Accepted");
-                break;
-            case "2":
                 orderStatus.setText("Processed");
                 break;
+            case "2":
+                orderStatus.setText("Pending");
+                break;
             case "3":
-                orderStatus.setText("Dispatched");
+                orderStatus.setText("Delivered");
                 break;
             case "4":
-                orderStatus.setText("Delivered");
+                orderStatus.setText("Picked");
                 break;
             default:
                 orderStatus.setText("Cancelled");
@@ -146,10 +143,10 @@ public class Order_ProcessingPage extends AppCompatActivity {
                 orderProcess.setText("PROCESS");
                 break;
             case "2":
-                orderProcess.setText("DISPATCH");
+                orderProcess.setText("Confirm Delivery");
                 break;
             case "3":
-                orderProcess.setText("Confirm Delivery");
+                orderProcess.setText("Confirm Pick");
                 break;
             default:
                 orderProcess.setText("CANCEL");
@@ -167,20 +164,7 @@ public class Order_ProcessingPage extends AppCompatActivity {
 
         dialog.show();
         //update status
-        if (status.equals("3")) {
-            db.collection("Orders").document("Customer").collection("order").document(id).update("served", String.valueOf(Integer.parseInt(status) + 1), "distributor", deliveryPerson)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            dialog.dismiss();
-                            finish();
-                        } else {
-                            //toast message
-                            Toast.makeText(Order_ProcessingPage.this, "Failed to update status", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    });
-        }
-        else{
+
             db.collection("Orders").document("Customer").collection("order").document(id).update("served", String.valueOf(Integer.parseInt(status) + 1))
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -193,6 +177,6 @@ public class Order_ProcessingPage extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     });
-        }
+
     }
 }

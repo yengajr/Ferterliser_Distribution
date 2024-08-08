@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-public class Order_ProcessingAdapter extends RecyclerView.Adapter<Order_ProcessingAdapter.ProductViewHolder>{
+public class Order_ProcessingAdapter extends RecyclerView.Adapter<Order_ProcessingAdapter.OrderViewHolder> {
 
     private final ArrayList<Order> orderArrayList;
     private final LayoutInflater inflater;
@@ -26,39 +29,79 @@ public class Order_ProcessingAdapter extends RecyclerView.Adapter<Order_Processi
 
     @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = inflater.inflate(R.layout.oders_card2, parent, false);
-        return new ProductViewHolder(v);
+        return new OrderViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order order = orderArrayList.get(position);
 
+        holder.orderDate.setText(order.getOrderDate());
+        holder.orderAddress.setText(order.getOrderAddress());
+        holder.orderName.setText(order.getEmailAddress());
 
 
-        holder.orderName.setText(order.productName);
-        holder.orderAddress.setText(order.orderAddress);
+        // Update status text and color
+        String status = order.getServed();
+        switch (status) {
+            case "0":
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.blue));
+                holder.orderStatus.setText("Placed");
+                break;
+            case "1":
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.magenta));
+                holder.orderStatus.setText("New");
+                break;
+            case "2":
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.yellow));
+                holder.orderStatus.setText("Dispatched");
+                break;
+            case "3":
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.orange));
+                holder.orderStatus.setText("Delivered");
+                break;
+            case "4":
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.green));
+                holder.orderStatus.setText("Picked");
+                break;
+            default:
+                holder.orderStatus.setTextColor(context.getResources().getColor(R.color.red));
+                holder.orderStatus.setText("Cancelled");
+                break;
+        }
 
-        holder.orderCount.setText(order.itemCount + "Bag(s)");
+        // Populate products in the order
+        holder.productsContainer.removeAllViews();
+        List<Map<String, Object>> products = order.getProducts(); // assuming getProducts() returns a List<Map>
+        for (Map<String, Object> product : products) {
+            View productView = inflater.inflate(R.layout.product_item, holder.productsContainer, false);
 
+            TextView productName = productView.findViewById(R.id.product_name);
+            TextView productCount = productView.findViewById(R.id.product_count);
+            TextView productPrice = productView.findViewById(R.id.product_price);
 
-        //on click listener send the details to the next activity
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open update page and pass product info
-                Intent intent = new Intent(context, Order_ProcessingPage.class);
-                intent.putExtra("orderId", order.itemId);
-                intent.putExtra("orderDate", order.orderDate);
-                intent.putExtra("orderStatus", order.served);
-                intent.putExtra("orderName", order.productName);
-                intent.putExtra("orderAddress", order.orderAddress);
-                intent.putExtra("orderTime", order.orderTime);
-                intent.putExtra("orderCount", order.itemCount);
-                intent.putExtra("orderPayment", order.paymentNumber);
-                context.startActivity(intent);
-            }
+            productName.setText((String) product.get("productName"));
+            productCount.setText("Count: " + product.get("itemCount"));
+            productPrice.setText("Price: " + product.get("cumulativePrice"));
+
+            holder.productsContainer.addView(productView);
+        }
+
+        // On click listener to send the details to the next activity
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, Order_ProcessingPage_delivery.class);
+            intent.putExtra("orderId", order.getOrderId());
+            intent.putExtra("orderDate", order.getOrderDate());
+            intent.putExtra("orderStatus", order.getServed());
+            intent.putExtra("orderAddress", order.getOrderAddress());
+            intent.putExtra("orderTime", order.getOrderTime());
+            intent.putExtra("orderPayment", order.getPaymentNumber());
+            intent.putExtra("orderStatus",order.getServed());
+            intent.putExtra("orderName", order.getEmailAddress());
+            // Assuming paymentNumber is a field in Order class
+            context.startActivity(intent);
         });
     }
 
@@ -67,16 +110,19 @@ public class Order_ProcessingAdapter extends RecyclerView.Adapter<Order_Processi
         return orderArrayList.size();
     }
 
-    public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        TextView  orderName, orderAddress, orderCount;
+    public static class OrderViewHolder extends RecyclerView.ViewHolder {
+        TextView  orderDate, orderAddress,orderName,orderStatus;
+        LinearLayout productsContainer;
 
-        public ProductViewHolder(@NonNull View itemView) {
+        public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            orderName = itemView.findViewById(R.id.order_name);
+            orderDate = itemView.findViewById(R.id.order_count);
             orderAddress = itemView.findViewById(R.id.order_address);
+            orderName = itemView.findViewById(R.id.order_name);
+            orderStatus = itemView.findViewById(R.id.status_space);
+            productsContainer = itemView.findViewById(R.id.products_container);
 
-            orderCount = itemView.findViewById(R.id.order_count);
         }
     }
 }
