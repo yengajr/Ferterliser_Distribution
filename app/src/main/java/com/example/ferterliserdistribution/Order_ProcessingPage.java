@@ -164,20 +164,7 @@ public class Order_ProcessingPage extends AppCompatActivity {
 
         dialog.show();
         //update status
-        if (status.equals("3")) {
-            db.collection("Orders").document("Customer").collection("order").document(id).update("served", String.valueOf(Integer.parseInt(status) + 1), "distributor", deliveryPerson)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            dialog.dismiss();
-                            finish();
-                        } else {
-                            //toast message
-                            Toast.makeText(Order_ProcessingPage.this, "Failed to update status", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    });
-        }
-        else{
+
             db.collection("Orders").document("Customer").collection("order").document(id).update("served", String.valueOf(Integer.parseInt(status) + 1))
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -190,6 +177,6 @@ public class Order_ProcessingPage extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     });
-        }
+
     }
 }
